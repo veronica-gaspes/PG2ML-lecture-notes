@@ -1,0 +1,1579 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Queues &#8212; Python - a gateway to machine learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Classes" href="classes.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/panda.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python - a gateway to machine learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   About these lecture notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Overview of the course
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Algorithms and their execution time behaviour
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algs/intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../algs/algs-lecture.html">
+   Lecture 1
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/loops.html">
+     Understanding
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       for
+      </span>
+     </code>
+     loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/primes.html">
+     Prime numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/recursion.html">
+     Understanding recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/mul.html">
+     Three algorithms for integer multiplication
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/theory-exercises-1.html">
+     Theory exercises 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/programming-exercises-1.html">
+     Programming exercises 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/programming-solutions-1.html">
+     Solutions to programming exercises 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../algs/execution-time.html">
+   Lecture 2
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/et.html">
+     Order and sorting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/math-and-experiments.html">
+     Measuring and estimating execution time behaviour
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Algorithm design paradigms
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../design/intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../design/dc-intro.html">
+   Lecture 3
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dc-mergesort.html">
+     Mergesort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dc-inversions.html">
+     Counting inversions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../design/dp-intro.html">
+   Lecture 4
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dp-fib.html">
+     Fibonacci numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dp-wis.html">
+     Maximum independent set for weighted path graphs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dp-knapsack.html">
+     The knapsack problem
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data structures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Data structures
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="lecture5.html">
+   Lecture 5
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="lists.html">
+     Lists in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classes.html">
+     Classes
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Queues
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ds/queues.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fds/queues.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/ds/queues.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#listing-the-contents-of-a-folder">
+   Listing the contents of a folder
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Queues</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#listing-the-contents-of-a-folder">
+   Listing the contents of a folder
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="queues">
+<h1>Queues<a class="headerlink" href="#queues" title="Permalink to this headline">¶</a></h1>
+<p>Some programs need to retrieve data in the same order as it was stored. We call this to <em>enqueue</em> items of data. We could imagine doing this by using a list to add elements at the end and retrieve them from the front, as in the following example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c1"># enqueue by placing at the end:</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">q</span> <span class="o">+</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c1"># dequeue by removing from the front:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Service first in queue:&#39;</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Service first in queue: 0
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Service first in queue: 1
+[2, 3, 4, 5, 6, 7, 8, 9]
+
+Service first in queue: 2
+[3, 4, 5, 6, 7, 8, 9]
+
+Service first in queue: 3
+[4, 5, 6, 7, 8, 9]
+
+Service first in queue: 4
+[5, 6, 7, 8, 9]
+
+Service first in queue: 5
+[6, 7, 8, 9]
+
+Service first in queue: 6
+[7, 8, 9]
+
+Service first in queue: 7
+[8, 9]
+
+Service first in queue: 8
+[9]
+
+Service first in queue: 9
+[]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The problem is that we know that these operations are linear time! We would like to have constant time instead (not more expensive than updating / reading an array).</p>
+<p>This can be achieved by keeping track of the first and the last element and keeping the elements together via links. We call the pair of an element and a link a Node. We use a class with the name <code class="docutils literal notranslate"><span class="pre">_Node</span></code> for these nodes (remember that we use the convention of using an underscore at the begining of a name to indicate that it is an auxiliary function or name). As you can see in the definintion in next cell, a node has two instance variables: an element (item) and a link (next).</p>
+<p>The class for queues is called <code class="docutils literal notranslate"><span class="pre">Queue</span></code> (no underscore!) and has two instance variables: the first node and the last node! It has methods to add items (<code class="docutils literal notranslate"><span class="pre">enqueue</span></code>)and to remove items (<code class="docutils literal notranslate"><span class="pre">dequeue</span></code>). Also for testing emptiness, for the number of elements and to make a string of the content.</p>
+<p>You to inspect the code! Confirm that all operations are constant time (except <code class="docutils literal notranslate"><span class="pre">__str__</span></code>!)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># From the book Introduction to Programming in Python, chapter 4.3 on Stacks and Queues:</span>
+<span class="c1"># https://introcs.cs.princeton.edu/python/43stack/</span>
+
+<span class="c1">#----------------------------------------------------------------------</span>
+
+<span class="c1"># A _Node object references an item and a next _Node object.</span>
+<span class="c1"># A Queue object is composed of _Node objects.</span>
+
+<span class="k">class</span> <span class="nc">_Node</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="nb">next</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">item</span>  <span class="c1"># Reference to an item</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>  <span class="c1"># Reference to the next _Node object</span>
+
+
+
+<span class="k">class</span> <span class="nc">Queue</span><span class="p">:</span>
+
+    <span class="c1">#-------------------------------------------------------------------</span>
+
+    <span class="c1"># Construct the Queue object self as an empty Queue object.</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_first</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Reference to first _Node</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last</span> <span class="o">=</span> <span class="kc">None</span>   <span class="c1"># Reference to last _Node</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_length</span> <span class="o">=</span> <span class="mi">0</span>    <span class="c1"># Number of items</span>
+
+    <span class="c1">#-------------------------------------------------------------------</span>
+
+    <span class="c1"># Return True if self is empty, and False otherwise.</span>
+
+    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first</span> <span class="ow">is</span> <span class="kc">None</span>
+
+    <span class="c1">#-------------------------------------------------------------------</span>
+
+    <span class="c1"># Add item to the end of self.</span>
+
+    <span class="k">def</span> <span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">oldLast</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last</span> <span class="o">=</span> <span class="n">_Node</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_first</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">oldLast</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_length</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1">#-------------------------------------------------------------------</span>
+
+    <span class="c1"># Remove the first item of self and return it.</span>
+
+    <span class="k">def</span> <span class="nf">dequeue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first</span><span class="o">.</span><span class="n">item</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_first</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_length</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">item</span>
+
+    <span class="c1">#-------------------------------------------------------------------</span>
+
+    <span class="c1"># Return the number of items in self.</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_length</span>
+
+    <span class="c1">#-------------------------------------------------------------------</span>
+
+    <span class="c1"># Return a string representation of self.</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first</span>
+        <span class="k">while</span> <span class="n">cur</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">item</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">return</span> <span class="n">s</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is the same example as before but using this implementation for queues:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c1"># dequeue by removing from the front:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Service first in queue:&#39;</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 1 2 3 4 5 6 7 8 9 
+
+Service first in queue: 0
+1 2 3 4 5 6 7 8 9 
+
+Service first in queue: 1
+2 3 4 5 6 7 8 9 
+
+Service first in queue: 2
+3 4 5 6 7 8 9 
+
+Service first in queue: 3
+4 5 6 7 8 9 
+
+Service first in queue: 4
+5 6 7 8 9 
+
+Service first in queue: 5
+6 7 8 9 
+
+Service first in queue: 6
+7 8 9 
+
+Service first in queue: 7
+8 9 
+
+Service first in queue: 8
+9 
+
+Service first in queue: 9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># In case we do not know how many times we can dequeue we can test for emptyness:</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="k">while</span> <span class="ow">not</span> <span class="n">q</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+    <span class="c1"># dequeue by removing from the front:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Service first in queue:&#39;</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 1 2 3 4 5 6 7 8 9 
+
+Service first in queue: 0
+1 2 3 4 5 6 7 8 9 
+
+Service first in queue: 1
+2 3 4 5 6 7 8 9 
+
+Service first in queue: 2
+3 4 5 6 7 8 9 
+
+Service first in queue: 3
+4 5 6 7 8 9 
+
+Service first in queue: 4
+5 6 7 8 9 
+
+Service first in queue: 5
+6 7 8 9 
+
+Service first in queue: 6
+7 8 9 
+
+Service first in queue: 7
+8 9 
+
+Service first in queue: 8
+9 
+
+Service first in queue: 9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="listing-the-contents-of-a-folder">
+<h2>Listing the contents of a folder<a class="headerlink" href="#listing-the-contents-of-a-folder" title="Permalink to this headline">¶</a></h2>
+<p>And now an example. Say you want to list the contents of a folder and of all folders under this one. In Python you can get a list of names of files and folders (directories) using the method <code class="docutils literal notranslate"><span class="pre">listdir</span></code> in the module <code class="docutils literal notranslate"><span class="pre">os</span></code>.</p>
+<p>Here is how my directory for this lecture notes looks like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>design
+ds
+intro.md
+panda.png
+algs
+_toc.yml
+_build
+_config.yml
+.ipynb_checkpoints
+overview
+panda.gif
+</pre></div>
+</div>
+</div>
+</div>
+<p>Not all of these are directories, so if we want to list the contents of the directories we need to test whether a name corresponds to a directory. This can be done in Python using the method <code class="docutils literal notranslate"><span class="pre">is_dir</span></code> in the module <code class="docutils literal notranslate"><span class="pre">os.path</span></code>.</p>
+<p>So, here we list all sub-directories also:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s1">&#39;../&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;../&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">))</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>design
+[&#39;dc-mergesort.ipynb&#39;, &#39;dc-inversions.ipynb&#39;, &#39;dp-knapsack.ipynb&#39;, &#39;dp-wis.ipynb&#39;, &#39;dp-fib.ipynb&#39;, &#39;intro.md&#39;, &#39;dc-intro.md&#39;, &#39;.ipynb_checkpoints&#39;, &#39;dp-intro.md&#39;]
+ds
+[&#39;intro.md&#39;, &#39;lists.ipynb&#39;, &#39;lecture5.md&#39;, &#39;queues.ipynb&#39;, &#39;classes.ipynb&#39;, &#39;.ipynb_checkpoints&#39;]
+intro.md
+panda.png
+algs
+[&#39;programming-exercises-1.ipynb&#39;, &#39;execution-time.md&#39;, &#39;theory-exercises-1.md&#39;, &#39;math-and-experiments.ipynb&#39;, &#39;et.ipynb&#39;, &#39;programming-solutions-1.ipynb&#39;, &#39;intro.md&#39;, &#39;mul.ipynb&#39;, &#39;loops.ipynb&#39;, &#39;recursion.ipynb&#39;, &#39;.ipynb_checkpoints&#39;, &#39;algs-lecture.md&#39;, &#39;primes.ipynb&#39;]
+_toc.yml
+_build
+[&#39;.DS_Store&#39;, &#39;html&#39;, &#39;jupyter_execute&#39;, &#39;.doctrees&#39;]
+_config.yml
+.ipynb_checkpoints
+[&#39;week2-divide-and-conquer-and-analysis-checkpoint.ipynb&#39;]
+overview
+[&#39;overview.md&#39;, &#39;sw-dev-cycle-ch7-sedgewick-cs.png&#39;, &#39;.ipynb_checkpoints&#39;]
+panda.gif
+</pre></div>
+</div>
+</div>
+</div>
+<p>We would like to list as long as there are files, as deep as needed. We do it level by level, using a queue! This algorithm is called Breadth First Search.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">list_dir_tree</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">q</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="n">q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+     
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_dir_tree</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>..
+../design
+../ds
+../intro.md
+../panda.png
+../algs
+../_toc.yml
+../_build
+../_config.yml
+../.ipynb_checkpoints
+../overview
+../panda.gif
+../design/dc-mergesort.ipynb
+../design/dc-inversions.ipynb
+../design/dp-knapsack.ipynb
+../design/dp-wis.ipynb
+../design/dp-fib.ipynb
+../design/intro.md
+../design/dc-intro.md
+../design/.ipynb_checkpoints
+../design/dp-intro.md
+../ds/intro.md
+../ds/lists.ipynb
+../ds/lecture5.md
+../ds/queues.ipynb
+../ds/classes.ipynb
+../ds/.ipynb_checkpoints
+../algs/programming-exercises-1.ipynb
+../algs/execution-time.md
+../algs/theory-exercises-1.md
+../algs/math-and-experiments.ipynb
+../algs/et.ipynb
+../algs/programming-solutions-1.ipynb
+../algs/intro.md
+../algs/mul.ipynb
+../algs/loops.ipynb
+../algs/recursion.ipynb
+../algs/.ipynb_checkpoints
+../algs/algs-lecture.md
+../algs/primes.ipynb
+../_build/.DS_Store
+../_build/html
+../_build/jupyter_execute
+../_build/.doctrees
+../.ipynb_checkpoints/week2-divide-and-conquer-and-analysis-checkpoint.ipynb
+../overview/overview.md
+../overview/sw-dev-cycle-ch7-sedgewick-cs.png
+../overview/.ipynb_checkpoints
+../design/.ipynb_checkpoints/dc-mergesort-checkpoint.ipynb
+../design/.ipynb_checkpoints/dp-knapsack-checkpoint.ipynb
+../design/.ipynb_checkpoints/dp-wis-checkpoint.ipynb
+../design/.ipynb_checkpoints/dp-fib-checkpoint.ipynb
+../design/.ipynb_checkpoints/dc-inversions-checkpoint.ipynb
+../ds/.ipynb_checkpoints/lists-checkpoint.ipynb
+../ds/.ipynb_checkpoints/queues-checkpoint.ipynb
+../ds/.ipynb_checkpoints/Untitled-checkpoint.ipynb
+../ds/.ipynb_checkpoints/classes-checkpoint.ipynb
+../algs/.ipynb_checkpoints/recursion-checkpoint.ipynb
+../algs/.ipynb_checkpoints/programming-solutions-1-checkpoint.ipynb
+../algs/.ipynb_checkpoints/math-and-experiments-checkpoint.ipynb
+../algs/.ipynb_checkpoints/loops-checkpoint.ipynb
+../algs/.ipynb_checkpoints/et-checkpoint.ipynb
+../algs/.ipynb_checkpoints/mul-checkpoint.ipynb
+../algs/.ipynb_checkpoints/programming-exercises-1-checkpoint.ipynb
+../algs/.ipynb_checkpoints/primes-checkpoint.ipynb
+../_build/html/design
+../_build/html/week2-divide-and-conquer-and-analysis.html
+../_build/html/index.html
+../_build/html/.DS_Store
+../_build/html/ds
+../_build/html/searchindex.js
+../_build/html/_panels_static
+../_build/html/_sources
+../_build/html/algs
+../_build/html/_static
+../_build/html/intro.html
+../_build/html/.buildinfo
+../_build/html/_images
+../_build/html/genindex.html
+../_build/html/search.html
+../_build/html/overview
+../_build/html/objects.inv
+../_build/html/reports
+../_build/jupyter_execute/design
+../_build/jupyter_execute/week2-divide-and-conquer-and-analysis_10_0.png
+../_build/jupyter_execute/ds
+../_build/jupyter_execute/week2-divide-and-conquer-and-analysis_11_0.png
+../_build/jupyter_execute/week2-divide-and-conquer-and-analysis.ipynb
+../_build/jupyter_execute/algs
+../_build/jupyter_execute/week2-divide-and-conquer-and-analysis.py
+../_build/jupyter_execute/week2-divide-and-conquer-and-analysis_9_0.png
+../_build/.doctrees/design
+../_build/.doctrees/week2-divide-and-conquer-and-analysis.doctree
+../_build/.doctrees/ds
+../_build/.doctrees/algs
+../_build/.doctrees/intro.doctree
+../_build/.doctrees/environment.pickle
+../_build/.doctrees/overview
+../_build/.doctrees/glue_cache.json
+../_build/html/design/dp-knapsack.html
+../_build/html/design/dc-inversions.html
+../_build/html/design/dp-intro.html
+../_build/html/design/dc-intro.html
+../_build/html/design/intro.html
+../_build/html/design/dp-wis.html
+../_build/html/design/dp-fib.html
+../_build/html/design/dc-mergesort.html
+../_build/html/ds/queues.html
+../_build/html/ds/lists.html
+../_build/html/ds/intro.html
+../_build/html/ds/lecture5.html
+../_build/html/ds/classes.html
+../_build/html/_panels_static/panels-variables.06eb56fa6e07937060861dad626602ad.css
+../_build/html/_panels_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css
+../_build/html/_sources/design
+../_build/html/_sources/.DS_Store
+../_build/html/_sources/ds
+../_build/html/_sources/intro.md
+../_build/html/_sources/week2-divide-and-conquer-and-analysis.ipynb
+../_build/html/_sources/algs
+../_build/html/_sources/overview
+../_build/html/algs/mul.html
+../_build/html/algs/programming-exercises-1.html
+../_build/html/algs/theory-exercises-1.html
+../_build/html/algs/multiplication.html
+../_build/html/algs/programming-solutions-1.html
+../_build/html/algs/et.html
+../_build/html/algs/intro.html
+../_build/html/algs/primes.html
+../_build/html/algs/algs-lecture.html
+../_build/html/algs/loops.html
+../_build/html/algs/recursion.html
+../_build/html/algs/math-and-experiments.html
+../_build/html/algs/execution-time.html
+../_build/html/algs/about-primes.html
+../_build/html/algs/for-primes-time.html
+../_build/html/_static/plus.png
+../_build/html/_static/underscore.js
+../_build/html/_static/webpack-macros.html
+../_build/html/_static/.DS_Store
+../_build/html/_static/documentation_options.js
+../_build/html/_static/searchtools.js
+../_build/html/_static/css
+../_build/html/_static/check-solid.svg
+../_build/html/_static/images
+../_build/html/_static/js
+../_build/html/_static/clipboard.min.js
+../_build/html/_static/file.png
+../_build/html/_static/copybutton.js
+../_build/html/_static/panda.png
+../_build/html/_static/jquery-3.5.1.js
+../_build/html/_static/__init__.py
+../_build/html/_static/__pycache__
+../_build/html/_static/language_data.js
+../_build/html/_static/copy-button.svg
+../_build/html/_static/copybutton_funcs.js
+../_build/html/_static/minus.png
+../_build/html/_static/mystnb.css
+../_build/html/_static/panels-variables.06eb56fa6e07937060861dad626602ad.css
+../_build/html/_static/basic.css
+../_build/html/_static/sphinx-book-theme.css
+../_build/html/_static/sphinx-book-theme.e2363ea40746bee74734a24ffefccd78.css
+../_build/html/_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css
+../_build/html/_static/pygments.css
+../_build/html/_static/sphinx-thebe.js
+../_build/html/_static/copybutton.css
+../_build/html/_static/doctools.js
+../_build/html/_static/sphinx-thebe.css
+../_build/html/_static/togglebutton.js
+../_build/html/_static/vendor
+../_build/html/_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js
+../_build/html/_static/jquery.js
+../_build/html/_static/togglebutton.css
+../_build/html/_static/underscore-1.13.1.js
+../_build/html/_images/math-and-experiments_19_0.png
+../_build/html/_images/week2-divide-and-conquer-and-analysis_10_0.png
+../_build/html/_images/week2-divide-and-conquer-and-analysis_11_0.png
+../_build/html/_images/math-and-experiments_25_0.png
+../_build/html/_images/math-and-experiments_21_0.png
+../_build/html/_images/math-and-experiments_23_0.png
+../_build/html/_images/math-and-experiments_12_0.png
+../_build/html/_images/dc-mergesort_14_0.png
+../_build/html/_images/math-and-experiments_14_0.png
+../_build/html/_images/dc-mergesort_12_0.png
+../_build/html/_images/math-and-experiments_16_0.png
+../_build/html/_images/math-and-experiments_35_0.png
+../_build/html/_images/lists_4_0.png
+../_build/html/_images/week2-divide-and-conquer-and-analysis_9_0.png
+../_build/html/_images/dc-inversions_11_0.png
+../_build/html/overview/overview.html
+../_build/html/reports/dp-fib.log
+../_build/html/reports/mul.log
+../_build/html/reports/programming-exercises-1.log
+../_build/html/reports/week2-divide-and-conquer-and-analysis.log
+../_build/jupyter_execute/design/dc-mergesort.ipynb
+../_build/jupyter_execute/design/dp-wis.py
+../_build/jupyter_execute/design/dc-inversions.ipynb
+../_build/jupyter_execute/design/dp-fib.py
+../_build/jupyter_execute/design/dp-knapsack.py
+../_build/jupyter_execute/design/dp-knapsack.ipynb
+../_build/jupyter_execute/design/dp-wis.ipynb
+../_build/jupyter_execute/design/dp-fib.ipynb
+../_build/jupyter_execute/design/dc-mergesort_14_0.png
+../_build/jupyter_execute/design/dc-mergesort_12_0.png
+../_build/jupyter_execute/design/dc-inversions_11_0.png
+../_build/jupyter_execute/design/dc-mergesort.py
+../_build/jupyter_execute/design/dc-inversions.py
+../_build/jupyter_execute/ds/queues.py
+../_build/jupyter_execute/ds/lists.py
+../_build/jupyter_execute/ds/lists.ipynb
+../_build/jupyter_execute/ds/queues.ipynb
+../_build/jupyter_execute/ds/classes.ipynb
+../_build/jupyter_execute/ds/lists_4_0.png
+../_build/jupyter_execute/ds/classes.py
+../_build/jupyter_execute/algs/primes.py
+../_build/jupyter_execute/algs/programming-exercises-1.ipynb
+../_build/jupyter_execute/algs/math-and-experiments_19_0.png
+../_build/jupyter_execute/algs/math-and-experiments.ipynb
+../_build/jupyter_execute/algs/et.py
+../_build/jupyter_execute/algs/et.ipynb
+../_build/jupyter_execute/algs/programming-solutions-1.py
+../_build/jupyter_execute/algs/programming-solutions-1.ipynb
+../_build/jupyter_execute/algs/math-and-experiments_25_0.png
+../_build/jupyter_execute/algs/math-and-experiments_21_0.png
+../_build/jupyter_execute/algs/math-and-experiments.py
+../_build/jupyter_execute/algs/mul.ipynb
+../_build/jupyter_execute/algs/loops.ipynb
+../_build/jupyter_execute/algs/math-and-experiments_23_0.png
+../_build/jupyter_execute/algs/math-and-experiments_12_0.png
+../_build/jupyter_execute/algs/loops.py
+../_build/jupyter_execute/algs/mul.py
+../_build/jupyter_execute/algs/recursion.ipynb
+../_build/jupyter_execute/algs/math-and-experiments_14_0.png
+../_build/jupyter_execute/algs/math-and-experiments_16_0.png
+../_build/jupyter_execute/algs/math-and-experiments_35_0.png
+../_build/jupyter_execute/algs/programming-exercises-1.py
+../_build/jupyter_execute/algs/recursion.py
+../_build/jupyter_execute/algs/primes.ipynb
+../_build/.doctrees/design/dc-intro.doctree
+../_build/.doctrees/design/dp-fib.doctree
+../_build/.doctrees/design/dp-wis.doctree
+../_build/.doctrees/design/dc-inversions.doctree
+../_build/.doctrees/design/intro.doctree
+../_build/.doctrees/design/dc-mergesort.doctree
+../_build/.doctrees/design/dp-knapsack.doctree
+../_build/.doctrees/design/dp-intro.doctree
+../_build/.doctrees/ds/classes.doctree
+../_build/.doctrees/ds/lists.doctree
+../_build/.doctrees/ds/lecture5.doctree
+../_build/.doctrees/ds/intro.doctree
+../_build/.doctrees/ds/queues.doctree
+../_build/.doctrees/algs/loops.doctree
+../_build/.doctrees/algs/programming-exercises-1.doctree
+../_build/.doctrees/algs/for-primes-time.doctree
+../_build/.doctrees/algs/programming-solutions-1.doctree
+../_build/.doctrees/algs/algs-lecture.doctree
+../_build/.doctrees/algs/theory-exercises-1.doctree
+../_build/.doctrees/algs/mul.doctree
+../_build/.doctrees/algs/recursion.doctree
+../_build/.doctrees/algs/multiplication.doctree
+../_build/.doctrees/algs/primes.doctree
+../_build/.doctrees/algs/execution-time.doctree
+../_build/.doctrees/algs/intro.doctree
+../_build/.doctrees/algs/math-and-experiments.doctree
+../_build/.doctrees/algs/about-primes.doctree
+../_build/.doctrees/algs/et.doctree
+../_build/.doctrees/overview/overview.doctree
+../_build/html/_sources/design/dc-mergesort.ipynb
+../_build/html/_sources/design/dc-inversions.ipynb
+../_build/html/_sources/design/dp-knapsack.ipynb
+../_build/html/_sources/design/dp-wis.ipynb
+../_build/html/_sources/design/dp-fib.ipynb
+../_build/html/_sources/design/intro.md
+../_build/html/_sources/design/dc-intro.md
+../_build/html/_sources/design/dp-intro.md
+../_build/html/_sources/ds/intro.md
+../_build/html/_sources/ds/lists.ipynb
+../_build/html/_sources/ds/lecture5.md
+../_build/html/_sources/ds/queues.ipynb
+../_build/html/_sources/ds/classes.ipynb
+../_build/html/_sources/algs/multiplication.md
+../_build/html/_sources/algs/programming-exercises-1.ipynb
+../_build/html/_sources/algs/execution-time.md
+../_build/html/_sources/algs/theory-exercises-1.md
+../_build/html/_sources/algs/math-and-experiments.ipynb
+../_build/html/_sources/algs/et.ipynb
+../_build/html/_sources/algs/programming-solutions-1.ipynb
+../_build/html/_sources/algs/intro.md
+../_build/html/_sources/algs/mul.ipynb
+../_build/html/_sources/algs/about-primes.md
+../_build/html/_sources/algs/loops.ipynb
+../_build/html/_sources/algs/recursion.ipynb
+../_build/html/_sources/algs/primes.md
+../_build/html/_sources/algs/algs-lecture.md
+../_build/html/_sources/algs/primes.ipynb
+../_build/html/_sources/algs/for-primes-time.md
+../_build/html/_sources/overview/overview.md
+../_build/html/_static/css/blank.css
+../_build/html/_static/css/theme.css
+../_build/html/_static/css/index.ff1ffe594081f20da1ef19478df9384b.css
+../_build/html/_static/images/logo_colab.png
+../_build/html/_static/images/logo_binder.svg
+../_build/html/_static/images/logo_jupyterhub.svg
+../_build/html/_static/js/index.be7d3bbb2ef33a8344ce.js
+../_build/html/_static/__pycache__/__init__.cpython-310.pyc
+../_build/html/_static/vendor/.DS_Store
+../_build/html/_static/vendor/fontawesome
+../_build/html/_static/vendor/fontawesome/5.13.0
+../_build/html/_static/vendor/fontawesome/.DS_Store
+../_build/html/_static/vendor/fontawesome/5.13.0/css
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts
+../_build/html/_static/vendor/fontawesome/5.13.0/LICENSE.txt
+../_build/html/_static/vendor/fontawesome/5.13.0/css/all.min.css
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.ttf
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-regular-400.svg
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-regular-400.woff2
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.eot
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.svg
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-regular-400.woff
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.eot
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.svg
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-regular-400.ttf
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.ttf
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-regular-400.eot
+</pre></div>
+</div>
+</div>
+</div>
+<p>Make sure you understand the algorithm and the output!  Can you find the source of this notebook? It is</p>
+<p><code class="docutils literal notranslate"><span class="pre">../ds/queues.ipynb</span></code>.</p>
+<p>The first thing is the starting path, then file and directory names directly under it, then next level for those names that were directories, etc.</p>
+<p>I would recommend you to try to follow the algorithm by hand with a directory structure such as</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>A
+    B
+        e
+        f
+        
+    c
+    
+    D
+        g
+        H
+            i 
+            j
+</pre></div>
+</div>
+<p>where capital letters are dictionaries and small letters are files. Make sure you keep track of the queue! You should produce the output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>A
+
+A/B
+A/c
+A/D
+
+A/B/e
+A/B/f
+A/D/g
+A/D/H
+
+A/D/H/i
+A/D/H/j
+</pre></div>
+</div>
+<p>where I have added new lines to mark the depth levels.</p>
+<p>By the way, what would the algorithm do if we used a stack instead?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">list_dir_tree_stack</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">s</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_dir_tree_stack</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>..
+../panda.gif
+../overview
+../overview/.ipynb_checkpoints
+../overview/sw-dev-cycle-ch7-sedgewick-cs.png
+../overview/overview.md
+../.ipynb_checkpoints
+../.ipynb_checkpoints/week2-divide-and-conquer-and-analysis-checkpoint.ipynb
+../_config.yml
+../_build
+../_build/.doctrees
+../_build/.doctrees/glue_cache.json
+../_build/.doctrees/overview
+../_build/.doctrees/overview/overview.doctree
+../_build/.doctrees/environment.pickle
+../_build/.doctrees/intro.doctree
+../_build/.doctrees/algs
+../_build/.doctrees/algs/et.doctree
+../_build/.doctrees/algs/about-primes.doctree
+../_build/.doctrees/algs/math-and-experiments.doctree
+../_build/.doctrees/algs/intro.doctree
+../_build/.doctrees/algs/execution-time.doctree
+../_build/.doctrees/algs/primes.doctree
+../_build/.doctrees/algs/multiplication.doctree
+../_build/.doctrees/algs/recursion.doctree
+../_build/.doctrees/algs/mul.doctree
+../_build/.doctrees/algs/theory-exercises-1.doctree
+../_build/.doctrees/algs/algs-lecture.doctree
+../_build/.doctrees/algs/programming-solutions-1.doctree
+../_build/.doctrees/algs/for-primes-time.doctree
+../_build/.doctrees/algs/programming-exercises-1.doctree
+../_build/.doctrees/algs/loops.doctree
+../_build/.doctrees/ds
+../_build/.doctrees/ds/queues.doctree
+../_build/.doctrees/ds/intro.doctree
+../_build/.doctrees/ds/lecture5.doctree
+../_build/.doctrees/ds/lists.doctree
+../_build/.doctrees/ds/classes.doctree
+../_build/.doctrees/week2-divide-and-conquer-and-analysis.doctree
+../_build/.doctrees/design
+../_build/.doctrees/design/dp-intro.doctree
+../_build/.doctrees/design/dp-knapsack.doctree
+../_build/.doctrees/design/dc-mergesort.doctree
+../_build/.doctrees/design/intro.doctree
+../_build/.doctrees/design/dc-inversions.doctree
+../_build/.doctrees/design/dp-wis.doctree
+../_build/.doctrees/design/dp-fib.doctree
+../_build/.doctrees/design/dc-intro.doctree
+../_build/jupyter_execute
+../_build/jupyter_execute/week2-divide-and-conquer-and-analysis_9_0.png
+../_build/jupyter_execute/week2-divide-and-conquer-and-analysis.py
+../_build/jupyter_execute/algs
+../_build/jupyter_execute/algs/primes.ipynb
+../_build/jupyter_execute/algs/recursion.py
+../_build/jupyter_execute/algs/programming-exercises-1.py
+../_build/jupyter_execute/algs/math-and-experiments_35_0.png
+../_build/jupyter_execute/algs/math-and-experiments_16_0.png
+../_build/jupyter_execute/algs/math-and-experiments_14_0.png
+../_build/jupyter_execute/algs/recursion.ipynb
+../_build/jupyter_execute/algs/mul.py
+../_build/jupyter_execute/algs/loops.py
+../_build/jupyter_execute/algs/math-and-experiments_12_0.png
+../_build/jupyter_execute/algs/math-and-experiments_23_0.png
+../_build/jupyter_execute/algs/loops.ipynb
+../_build/jupyter_execute/algs/mul.ipynb
+../_build/jupyter_execute/algs/math-and-experiments.py
+../_build/jupyter_execute/algs/math-and-experiments_21_0.png
+../_build/jupyter_execute/algs/math-and-experiments_25_0.png
+../_build/jupyter_execute/algs/programming-solutions-1.ipynb
+../_build/jupyter_execute/algs/programming-solutions-1.py
+../_build/jupyter_execute/algs/et.ipynb
+../_build/jupyter_execute/algs/et.py
+../_build/jupyter_execute/algs/math-and-experiments.ipynb
+../_build/jupyter_execute/algs/math-and-experiments_19_0.png
+../_build/jupyter_execute/algs/programming-exercises-1.ipynb
+../_build/jupyter_execute/algs/primes.py
+../_build/jupyter_execute/week2-divide-and-conquer-and-analysis.ipynb
+../_build/jupyter_execute/week2-divide-and-conquer-and-analysis_11_0.png
+../_build/jupyter_execute/ds
+../_build/jupyter_execute/ds/classes.py
+../_build/jupyter_execute/ds/lists_4_0.png
+../_build/jupyter_execute/ds/classes.ipynb
+../_build/jupyter_execute/ds/queues.ipynb
+../_build/jupyter_execute/ds/lists.ipynb
+../_build/jupyter_execute/ds/lists.py
+../_build/jupyter_execute/ds/queues.py
+../_build/jupyter_execute/week2-divide-and-conquer-and-analysis_10_0.png
+../_build/jupyter_execute/design
+../_build/jupyter_execute/design/dc-inversions.py
+../_build/jupyter_execute/design/dc-mergesort.py
+../_build/jupyter_execute/design/dc-inversions_11_0.png
+../_build/jupyter_execute/design/dc-mergesort_12_0.png
+../_build/jupyter_execute/design/dc-mergesort_14_0.png
+../_build/jupyter_execute/design/dp-fib.ipynb
+../_build/jupyter_execute/design/dp-wis.ipynb
+../_build/jupyter_execute/design/dp-knapsack.ipynb
+../_build/jupyter_execute/design/dp-knapsack.py
+../_build/jupyter_execute/design/dp-fib.py
+../_build/jupyter_execute/design/dc-inversions.ipynb
+../_build/jupyter_execute/design/dp-wis.py
+../_build/jupyter_execute/design/dc-mergesort.ipynb
+../_build/html
+../_build/html/reports
+../_build/html/reports/week2-divide-and-conquer-and-analysis.log
+../_build/html/reports/programming-exercises-1.log
+../_build/html/reports/mul.log
+../_build/html/reports/dp-fib.log
+../_build/html/objects.inv
+../_build/html/overview
+../_build/html/overview/overview.html
+../_build/html/search.html
+../_build/html/genindex.html
+../_build/html/_images
+../_build/html/_images/dc-inversions_11_0.png
+../_build/html/_images/week2-divide-and-conquer-and-analysis_9_0.png
+../_build/html/_images/lists_4_0.png
+../_build/html/_images/math-and-experiments_35_0.png
+../_build/html/_images/math-and-experiments_16_0.png
+../_build/html/_images/dc-mergesort_12_0.png
+../_build/html/_images/math-and-experiments_14_0.png
+../_build/html/_images/dc-mergesort_14_0.png
+../_build/html/_images/math-and-experiments_12_0.png
+../_build/html/_images/math-and-experiments_23_0.png
+../_build/html/_images/math-and-experiments_21_0.png
+../_build/html/_images/math-and-experiments_25_0.png
+../_build/html/_images/week2-divide-and-conquer-and-analysis_11_0.png
+../_build/html/_images/week2-divide-and-conquer-and-analysis_10_0.png
+../_build/html/_images/math-and-experiments_19_0.png
+../_build/html/.buildinfo
+../_build/html/intro.html
+../_build/html/_static
+../_build/html/_static/underscore-1.13.1.js
+../_build/html/_static/togglebutton.css
+../_build/html/_static/jquery.js
+../_build/html/_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js
+../_build/html/_static/vendor
+../_build/html/_static/vendor/fontawesome
+../_build/html/_static/vendor/fontawesome/.DS_Store
+../_build/html/_static/vendor/fontawesome/5.13.0
+../_build/html/_static/vendor/fontawesome/5.13.0/LICENSE.txt
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-regular-400.eot
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.ttf
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-regular-400.ttf
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.svg
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.eot
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-regular-400.woff
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.svg
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.eot
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-regular-400.woff2
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-regular-400.svg
+../_build/html/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.ttf
+../_build/html/_static/vendor/fontawesome/5.13.0/css
+../_build/html/_static/vendor/fontawesome/5.13.0/css/all.min.css
+../_build/html/_static/vendor/.DS_Store
+../_build/html/_static/togglebutton.js
+../_build/html/_static/sphinx-thebe.css
+../_build/html/_static/doctools.js
+../_build/html/_static/copybutton.css
+../_build/html/_static/sphinx-thebe.js
+../_build/html/_static/pygments.css
+../_build/html/_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css
+../_build/html/_static/sphinx-book-theme.e2363ea40746bee74734a24ffefccd78.css
+../_build/html/_static/sphinx-book-theme.css
+../_build/html/_static/basic.css
+../_build/html/_static/panels-variables.06eb56fa6e07937060861dad626602ad.css
+../_build/html/_static/mystnb.css
+../_build/html/_static/minus.png
+../_build/html/_static/copybutton_funcs.js
+../_build/html/_static/copy-button.svg
+../_build/html/_static/language_data.js
+../_build/html/_static/__pycache__
+../_build/html/_static/__pycache__/__init__.cpython-310.pyc
+../_build/html/_static/__init__.py
+../_build/html/_static/jquery-3.5.1.js
+../_build/html/_static/panda.png
+../_build/html/_static/copybutton.js
+../_build/html/_static/file.png
+../_build/html/_static/clipboard.min.js
+../_build/html/_static/js
+../_build/html/_static/js/index.be7d3bbb2ef33a8344ce.js
+../_build/html/_static/images
+../_build/html/_static/images/logo_jupyterhub.svg
+../_build/html/_static/images/logo_binder.svg
+../_build/html/_static/images/logo_colab.png
+../_build/html/_static/check-solid.svg
+../_build/html/_static/css
+../_build/html/_static/css/index.ff1ffe594081f20da1ef19478df9384b.css
+../_build/html/_static/css/theme.css
+../_build/html/_static/css/blank.css
+../_build/html/_static/searchtools.js
+../_build/html/_static/documentation_options.js
+../_build/html/_static/.DS_Store
+../_build/html/_static/webpack-macros.html
+../_build/html/_static/underscore.js
+../_build/html/_static/plus.png
+../_build/html/algs
+../_build/html/algs/for-primes-time.html
+../_build/html/algs/about-primes.html
+../_build/html/algs/execution-time.html
+../_build/html/algs/math-and-experiments.html
+../_build/html/algs/recursion.html
+../_build/html/algs/loops.html
+../_build/html/algs/algs-lecture.html
+../_build/html/algs/primes.html
+../_build/html/algs/intro.html
+../_build/html/algs/et.html
+../_build/html/algs/programming-solutions-1.html
+../_build/html/algs/multiplication.html
+../_build/html/algs/theory-exercises-1.html
+../_build/html/algs/programming-exercises-1.html
+../_build/html/algs/mul.html
+../_build/html/_sources
+../_build/html/_sources/overview
+../_build/html/_sources/overview/overview.md
+../_build/html/_sources/algs
+../_build/html/_sources/algs/for-primes-time.md
+../_build/html/_sources/algs/primes.ipynb
+../_build/html/_sources/algs/algs-lecture.md
+../_build/html/_sources/algs/primes.md
+../_build/html/_sources/algs/recursion.ipynb
+../_build/html/_sources/algs/loops.ipynb
+../_build/html/_sources/algs/about-primes.md
+../_build/html/_sources/algs/mul.ipynb
+../_build/html/_sources/algs/intro.md
+../_build/html/_sources/algs/programming-solutions-1.ipynb
+../_build/html/_sources/algs/et.ipynb
+../_build/html/_sources/algs/math-and-experiments.ipynb
+../_build/html/_sources/algs/theory-exercises-1.md
+../_build/html/_sources/algs/execution-time.md
+../_build/html/_sources/algs/programming-exercises-1.ipynb
+../_build/html/_sources/algs/multiplication.md
+../_build/html/_sources/week2-divide-and-conquer-and-analysis.ipynb
+../_build/html/_sources/intro.md
+../_build/html/_sources/ds
+../_build/html/_sources/ds/classes.ipynb
+../_build/html/_sources/ds/queues.ipynb
+../_build/html/_sources/ds/lecture5.md
+../_build/html/_sources/ds/lists.ipynb
+../_build/html/_sources/ds/intro.md
+../_build/html/_sources/.DS_Store
+../_build/html/_sources/design
+../_build/html/_sources/design/dp-intro.md
+../_build/html/_sources/design/dc-intro.md
+../_build/html/_sources/design/intro.md
+../_build/html/_sources/design/dp-fib.ipynb
+../_build/html/_sources/design/dp-wis.ipynb
+../_build/html/_sources/design/dp-knapsack.ipynb
+../_build/html/_sources/design/dc-inversions.ipynb
+../_build/html/_sources/design/dc-mergesort.ipynb
+../_build/html/_panels_static
+../_build/html/_panels_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css
+../_build/html/_panels_static/panels-variables.06eb56fa6e07937060861dad626602ad.css
+../_build/html/searchindex.js
+../_build/html/ds
+../_build/html/ds/classes.html
+../_build/html/ds/lecture5.html
+../_build/html/ds/intro.html
+../_build/html/ds/lists.html
+../_build/html/ds/queues.html
+../_build/html/.DS_Store
+../_build/html/index.html
+../_build/html/week2-divide-and-conquer-and-analysis.html
+../_build/html/design
+../_build/html/design/dc-mergesort.html
+../_build/html/design/dp-fib.html
+../_build/html/design/dp-wis.html
+../_build/html/design/intro.html
+../_build/html/design/dc-intro.html
+../_build/html/design/dp-intro.html
+../_build/html/design/dc-inversions.html
+../_build/html/design/dp-knapsack.html
+../_build/.DS_Store
+../_toc.yml
+../algs
+../algs/primes.ipynb
+../algs/algs-lecture.md
+../algs/.ipynb_checkpoints
+../algs/.ipynb_checkpoints/primes-checkpoint.ipynb
+../algs/.ipynb_checkpoints/programming-exercises-1-checkpoint.ipynb
+../algs/.ipynb_checkpoints/mul-checkpoint.ipynb
+../algs/.ipynb_checkpoints/et-checkpoint.ipynb
+../algs/.ipynb_checkpoints/loops-checkpoint.ipynb
+../algs/.ipynb_checkpoints/math-and-experiments-checkpoint.ipynb
+../algs/.ipynb_checkpoints/programming-solutions-1-checkpoint.ipynb
+../algs/.ipynb_checkpoints/recursion-checkpoint.ipynb
+../algs/recursion.ipynb
+../algs/loops.ipynb
+../algs/mul.ipynb
+../algs/intro.md
+../algs/programming-solutions-1.ipynb
+../algs/et.ipynb
+../algs/math-and-experiments.ipynb
+../algs/theory-exercises-1.md
+../algs/execution-time.md
+../algs/programming-exercises-1.ipynb
+../panda.png
+../intro.md
+../ds
+../ds/.ipynb_checkpoints
+../ds/.ipynb_checkpoints/classes-checkpoint.ipynb
+../ds/.ipynb_checkpoints/Untitled-checkpoint.ipynb
+../ds/.ipynb_checkpoints/queues-checkpoint.ipynb
+../ds/.ipynb_checkpoints/lists-checkpoint.ipynb
+../ds/classes.ipynb
+../ds/queues.ipynb
+../ds/lecture5.md
+../ds/lists.ipynb
+../ds/intro.md
+../design
+../design/dp-intro.md
+../design/.ipynb_checkpoints
+../design/.ipynb_checkpoints/dc-inversions-checkpoint.ipynb
+../design/.ipynb_checkpoints/dp-fib-checkpoint.ipynb
+../design/.ipynb_checkpoints/dp-wis-checkpoint.ipynb
+../design/.ipynb_checkpoints/dp-knapsack-checkpoint.ipynb
+../design/.ipynb_checkpoints/dc-mergesort-checkpoint.ipynb
+../design/dc-intro.md
+../design/intro.md
+../design/dp-fib.ipynb
+../design/dp-wis.ipynb
+../design/dp-knapsack.ipynb
+../design/dc-inversions.ipynb
+../design/dc-mergesort.ipynb
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see it goes as deep as possible (instead of level by level) this algorithm is called DFS: Depth First Search.</p>
+<p>Make sure you can follow the stack in the example with letters we suggested before. Here is the output you should expect:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>A
+A/B
+A/B/e
+A/B/f
+A/c
+A/D
+A/D/g
+A/D/H
+A/D/H/i
+A/D/H/j
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ds"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="classes.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Classes</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Veronica Gaspes<br/>
+    
+        &copy; Copyright none.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
