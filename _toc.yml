@@ -1,0 +1,73 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: Overview of the course
+    chapters:
+    - file: overview/overview.md
+    
+  - caption: Algorithms and their execution time behaviour
+    chapters:
+    - file: algs/intro
+    - file: algs/algs-lecture
+      sections:
+      - file: algs/loops
+      - file: algs/primes
+      - file: algs/recursion
+      - file: algs/mul
+      - file: algs/theory-exercises-1
+      - file: algs/programming-exercises-1
+      - file: algs/programming-solutions-1
+      
+    - file: algs/execution-time.md
+      sections:
+      - file: algs/et.ipynb
+      - file: algs/math-and-experiments
+
+  - caption: Algorithm design paradigms
+    chapters:
+    - file: design/intro
+    
+    - file: design/dc-intro
+      sections:
+      - file: design/dc-mergesort
+      - file: design/dc-inversions
+
+    - file: design/dp-intro
+      sections:
+      - file: design/dp-fib
+      - file: design/dp-wis
+      - file: design/dp-knapsack
+
+  - caption: Data structures
+    chapters:
+    - file: ds/intro
+    - file: ds/lecture5
+      sections:
+      - file: ds/lists
+      - file: ds/classes
+      - file: ds/queues
+      - file: ds/stacks
+
+    - file: ds/heap-intro
+      sections:
+      - file: ds/heap
+      - file: ds/heap-apps      
+
+    - file: ds/bst-intro
+      sections:
+      - file: ds/bst
+      - file: ds/bst-apps
+
+    - file: ds/ht-intr
+      sections:
+      - file: ds/ht
+      - file: ds/ht-apps
+
+    - file: ds/graphs-intro
+      sections:
+      - file: ds/graphs
+      - file: ds/graphs-apps
+    

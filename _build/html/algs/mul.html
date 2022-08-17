@@ -1,0 +1,1350 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three algorithms for integer multiplication &#8212; Python - a gateway to machine learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Theory exercises 1" href="theory-exercises-1.html" />
+    <link rel="prev" title="Understanding recursion" href="recursion.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/panda.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python - a gateway to machine learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   About these lecture notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Overview of the course
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Algorithms and their execution time behaviour
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="algs-lecture.html">
+   Lecture 1
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="loops.html">
+     Understanding
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       for
+      </span>
+     </code>
+     loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="primes.html">
+     Prime numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="recursion.html">
+     Understanding recursion
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Three algorithms for integer multiplication
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="theory-exercises-1.html">
+     Theory exercises 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="programming-exercises-1.html">
+     Programming exercises 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="programming-solutions-1.html">
+     Solutions to programming exercises 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="execution-time.html">
+   Lecture 2
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="et.html">
+     Order and sorting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="math-and-experiments.html">
+     Measuring and estimating execution time behaviour
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Algorithm design paradigms
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../design/intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../design/dc-intro.html">
+   Lecture 3
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dc-mergesort.html">
+     Mergesort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dc-inversions.html">
+     Counting inversions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../design/dp-intro.html">
+   Lecture 4
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dp-fib.html">
+     Fibonacci numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dp-wis.html">
+     Maximum independent set for weighted path graphs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dp-knapsack.html">
+     The knapsack problem
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data structures
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ds/intro.html">
+   Data structures
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ds/lecture5.html">
+   Lecture 5
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/lists.html">
+     Lists in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/classes.html">
+     Classes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/queues.html">
+     Queues
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/algs/mul.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Falgs/mul.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/algs/mul.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-programs-we-need">
+   Some programs we need
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-would-you-test-this">
+     How would you test this?
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#to-and-from-integers">
+       To and from integers
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-school-algorithm-for-multiplication">
+   The school algorithm for multiplication
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     How would you test this?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-recursive-algorithm">
+   A recursive algorithm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#karatsuba-s-algorithm">
+   Karatsuba’s algorithm
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Three algorithms for integer multiplication</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-programs-we-need">
+   Some programs we need
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-would-you-test-this">
+     How would you test this?
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#to-and-from-integers">
+       To and from integers
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-school-algorithm-for-multiplication">
+   The school algorithm for multiplication
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     How would you test this?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-recursive-algorithm">
+   A recursive algorithm
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#karatsuba-s-algorithm">
+   Karatsuba’s algorithm
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="three-algorithms-for-integer-multiplication">
+<h1>Three algorithms for integer multiplication<a class="headerlink" href="#three-algorithms-for-integer-multiplication" title="Permalink to this headline">¶</a></h1>
+<p>Again we want to distinguish between the decription of a problem, the description of several solutions (in our case algorithms) and the programs that implement these algorithms.</p>
+<p>We also introduce two ways of exploring our programs:</p>
+<ol class="simple">
+<li><p>figuring out how to test that the program does what we want, and</p></li>
+<li><p>figuring out how to explore what happens with execution time as the size of the input gets bigger and bigger.</p></li>
+</ol>
+<p>The problem is discussed in detail in the first chapter of the book <a class="reference external" href="http://www.algorithmsilluminated.org">Algorithms illuminated</a>. The website for the book includes detailed videos that explain the problem and the three solutions. In this section we focus on the programs that implement the three solutions. Our purpose is to continue to show how to go from an algorithm to a Python program.</p>
+<p>The problem is to calculate the product of two non negative integer numbers. This seems trivial: you know how to do this with pen and paper with what we call the school algorithm. And Python has an operation <code class="docutils literal notranslate"><span class="pre">*</span></code> that works perfectly well. So why bother?</p>
+<p>On the one hand it helps us focus on a problem that you can understand without any effort. On the other hand we hope to surprise you with a couple of solutions that seem very strange and give you a feeling for how very different solutions to the same problem might be. And finally, you will get to know one of the algorithms that are used in real systems to multiply big numbers (numbers with more than 1000 digits). Python uses this algorithm to multiply numbers larger than those that can be multiplied using the machine instruction for multiplication.</p>
+<div class="section" id="some-programs-we-need">
+<h2>Some programs we need<a class="headerlink" href="#some-programs-we-need" title="Permalink to this headline">¶</a></h2>
+<p>All algorithms and programs we show in this section use lists of digits. Instead of tables for multiplication and addition we use Python operations <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">+</span></code> when we need the result for one-digit numbers (observe that the result of adding or multiplying two one-digit numbers can be a two-digit number so we extract the two digits using <code class="docutils literal notranslate"><span class="pre">//</span> <span class="pre">10</span></code> and <code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">10</span></code>.</p>
+<p>We will need addition and subtraction. The functions <code class="docutils literal notranslate"><span class="pre">plus</span></code> and <code class="docutils literal notranslate"><span class="pre">minus</span></code> implement the algorithms that we all learned at school to add and subtract numbers. Put some effort in understanding the details in different parts of each program:</p>
+<ul class="simple">
+<li><p>making both lists of the same size by adding 0:s to the left</p></li>
+<li><p>use of carry</p></li>
+<li><p>going trough the number from least significant digit to most significant digit.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># addition for two lists of digits</span>
+<span class="k">def</span> <span class="nf">plus</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    
+    <span class="c1"># Make them the same length by adding leading 0s</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="o">+</span> <span class="n">m</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="n">n</span>
+        
+    <span class="c1"># build the list for the result</span>
+    <span class="n">carry</span>  <span class="o">=</span> <span class="mi">0</span>
+    <span class="nb">sum</span>    <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">))):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">carry</span> <span class="c1"># here we can get a two-digit number</span>
+        <span class="n">carry</span> <span class="o">=</span> <span class="n">a</span> <span class="o">//</span> <span class="mi">10</span>
+        <span class="nb">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span> <span class="o">%</span> <span class="mi">10</span>
+
+    <span class="c1"># possibly extend it with the carry!</span>
+    <span class="k">if</span> <span class="n">carry</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="nb">sum</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">carry</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sum</span>
+
+<span class="c1"># subtraction for two lists of digits m and n</span>
+<span class="c1"># both m,n &gt;= 0, m &gt;= n</span>
+<span class="k">def</span> <span class="nf">minus</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    <span class="c1"># Make them the same length by adding leading 0s</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="o">+</span> <span class="n">m</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="n">n</span>  
+        
+    <span class="n">carry</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">))):</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">carry</span>
+        <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="p">:</span> 
+            <span class="n">diff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">b</span>
+            <span class="n">carry</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">diff</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">b</span>
+            <span class="n">carry</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">diff</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is an example. To add 123 and 45 we call the function <code class="docutils literal notranslate"><span class="pre">plus</span></code> with the lists <code class="docutils literal notranslate"><span class="pre">[1,2,3]</span></code> and <code class="docutils literal notranslate"><span class="pre">[4,5]</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plus</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The function starts by making the lists have the same length without changing their meaning as numbers:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The function initializes the carry to 0 and the list with the result to 0s:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">carry</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nb">sum</span>   <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The function goes through all the elements of both lists from the back to the front (look at the <code class="docutils literal notranslate"><span class="pre">reversed(range(len(m)))</span></code> in the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop) doing what you would do with pen-and-paper: add the two digits in a given place from the two lists, add the carry and split it into the digit you put in the result and the carry.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>      <span class="o">=</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">0</span>  <span class="c1"># 8</span>
+<span class="n">carry</span>  <span class="o">=</span> <span class="mi">8</span> <span class="o">//</span> <span class="mi">10</span>    <span class="c1"># 0</span>
+<span class="nb">sum</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">%</span> <span class="mi">10</span>     <span class="c1"># 8</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>      <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">0</span> <span class="c1"># 6</span>
+<span class="n">carry</span>  <span class="o">=</span> <span class="mi">6</span> <span class="o">//</span> <span class="mi">10</span>   <span class="c1"># 0</span>
+<span class="nb">sum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">%</span> <span class="mi">10</span>    <span class="c1"># 6</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>      <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">0</span> <span class="o">+</span> <span class="mi">0</span> <span class="c1"># 1</span>
+<span class="n">carry</span>  <span class="o">=</span> <span class="mi">1</span> <span class="o">//</span> <span class="mi">10</span>   <span class="c1"># 0</span>
+<span class="nb">sum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">%</span> <span class="mi">10</span>    <span class="c1"># 1</span>
+</pre></div>
+</div>
+<p>When this is done it might be tha case that there is a non-zero carry that has to be added at the beggining of the number. In the example this is not the case.</p>
+<div class="section" id="how-would-you-test-this">
+<h3>How would you test this?<a class="headerlink" href="#how-would-you-test-this" title="Permalink to this headline">¶</a></h3>
+<p>In this course we will often want to understand both whether the algorithm works correctly (calculates what it should) and whether it is feasible (how does execution time grow when the size of the input grows?).</p>
+<ol class="simple">
+<li><p>For understanding whether it works correctly we can try to convert back and forth from lists of digits to numbers and compare the result of our program with Python’s <code class="docutils literal notranslate"><span class="pre">*</span></code>.</p></li>
+<li><p>For understanding how the execution time grows when the size of the input grows, we need first to understand what to consider the size of the input. What is it in the input that influences the number of operations the program has to execute?</p></li>
+</ol>
+<div class="section" id="to-and-from-integers">
+<h4>To and from integers<a class="headerlink" href="#to-and-from-integers" title="Permalink to this headline">¶</a></h4>
+<p>For 1) we would like to compare the results of our operations with the operations in Python for numbers. In order to be able to use lists and numbers we define the functions <code class="docutils literal notranslate"><span class="pre">to_int</span></code> and <code class="docutils literal notranslate"><span class="pre">from_int</span></code>.</p>
+<p>These functions should be such that for any list of digits <code class="docutils literal notranslate"><span class="pre">n</span></code></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">from_int</span><span class="p">(</span><span class="n">to_int</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">==</span> <span class="n">n</span> 
+</pre></div>
+</div>
+<p>and for any number <code class="docutils literal notranslate"><span class="pre">n</span></code></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">to_int</span><span class="p">(</span><span class="n">from_int</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">==</span> <span class="n">n</span> 
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_int</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="k">def</span> <span class="nf">from_int</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span> <span class="k">return</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">from_int</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">n</span> <span class="o">%</span> <span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">to_int</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>123
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">from_int</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[4, 5]
+</pre></div>
+</div>
+</div>
+</div>
+<p>With these two functions we can program a function to test our plus function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_plus</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">to_int</span><span class="p">(</span><span class="n">plus</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">))</span> <span class="o">==</span> <span class="n">to_int</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="n">to_int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_plus</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can in fact program a function that generates random lists of digits and does this test.</p>
+<p>The argument to this new function is the number of times we want to run our test.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_plus_random</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+        
+        <span class="c1"># generate 2 random non negative numbers</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+        
+        <span class="c1"># calculate their lists of digits</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">from_int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">from_int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        
+        <span class="c1"># test whether the function plus of the two lists </span>
+        <span class="c1"># produces a different value than Python&#39;s +</span>
+        <span class="c1"># if this is the case we do not neeed to test any more:</span>
+        <span class="c1"># produce an error message and return False</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">!=</span> <span class="n">to_int</span><span class="p">(</span><span class="n">plus</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s1">&#39;plus&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="n">plus</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">),</span> <span class="s1">&#39;but should be&#39;</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        
+    <span class="c1"># If the program gets here (observe: the for loop has terminated!)</span>
+    <span class="c1"># we know that there were no cases that produced the wrong result!</span>
+    <span class="c1"># print a message and return True</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Passed all&#39;</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="s1">&#39;test cases.&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_plus_random</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Passed all 100 test cases.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_minus_random</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+        
+        <span class="c1"># generate 2 random numbers, first one bigger</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+        
+        <span class="c1"># calculate their lists of digits</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">from_int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">from_int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        
+        <span class="c1"># test whether the function minus</span>
+        <span class="c1"># produces a different value than Python&#39;s -</span>
+        <span class="c1"># if this is the case we do not neeed to test any more:</span>
+        <span class="c1"># produce an error message and return False</span>
+        <span class="k">if</span> <span class="n">a</span><span class="o">-</span><span class="n">b</span> <span class="o">!=</span> <span class="n">to_int</span><span class="p">(</span><span class="n">minus</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s1">&#39;minus&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="n">minus</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">),</span> <span class="s1">&#39;but should be&#39;</span><span class="p">,</span> <span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        
+    <span class="c1"># If the program gets here (observe: the for loop has terminated!)</span>
+    <span class="c1"># we know that there were no cases that produced the wrong result!</span>
+    <span class="c1"># print a message and return True</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Passed all&#39;</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="s1">&#39;test cases.&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_minus_random</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Passed all 100 test cases.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code for these two functions is very (<strong>very</strong>) similar! The only difference is that we use either <code class="docutils literal notranslate"><span class="pre">plus</span></code>or <code class="docutils literal notranslate"><span class="pre">minus</span></code> and <code class="docutils literal notranslate"><span class="pre">+</span></code> or <code class="docutils literal notranslate"><span class="pre">-</span></code>!</p>
+<p>Fortunatelly in Python we can use functions as arguments to other functions. Then we can program the following testing function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_fun_random</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">function_under_test</span><span class="p">,</span> <span class="n">reference_function</span><span class="p">):</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+        
+        <span class="n">a</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">2000</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+        
+        <span class="n">m</span> <span class="o">=</span> <span class="n">from_int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">from_int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">reference_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">!=</span> <span class="n">to_int</span><span class="p">(</span><span class="n">function_under_test</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;correct result is&#39;</span><span class="p">,</span> <span class="n">reference_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">),</span> <span class="s1">&#39;but found&#39;</span><span class="p">,</span> <span class="n">function_under_test</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        
+        
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Passed all&#39;</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="s1">&#39;test cases.&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In order to use arithmetic operators as functions we need to use the module <code class="docutils literal notranslate"><span class="pre">operator</span></code> from Python where all operators have an associated function: <a class="reference external" href="https://docs.python.org/3/library/operator.html">Standard operators as functions</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">operator</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The function under test is plus and the reference function is + (used as operator.add)</span>
+<span class="n">test_fun_random</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">plus</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Passed all 100 test cases.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The function under test is minus and the reference function is - (used as operator.add)</span>
+<span class="n">test_fun_random</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">minus</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">sub</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Passed all 100 test cases.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-school-algorithm-for-multiplication">
+<h2>The school algorithm for multiplication<a class="headerlink" href="#the-school-algorithm-for-multiplication" title="Permalink to this headline">¶</a></h2>
+<p>The first solution to the problem of computing the product of two non negative integers is the algorithm most of us learned at school and that Tim Roughgarden discusses in the book and in one of the videos.</p>
+<p>Here we illustrate it with an example:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>   <span class="mi">1234</span>
+   <span class="n">x</span> <span class="mi">56</span>
+<span class="o">--------</span>
+   <span class="mi">7404</span>
+  <span class="mi">61700</span>
+<span class="o">--------</span>
+  <span class="mi">69104</span>
+</pre></div>
+</div>
+<p>where</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="mi">7404</span> <span class="o">==</span> <span class="mi">1234</span> <span class="o">*</span> <span class="mi">6</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="mi">6170</span> <span class="o">==</span> <span class="mi">1234</span> <span class="o">*</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="mi">69104</span> <span class="o">==</span> <span class="mi">7404</span> <span class="o">+</span> <span class="mi">61700</span>
+</pre></div>
+</div>
+<p>We already know how to add two lists of digits, we now need a program to multipy a digit and a list of digits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">digit_times_number</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+
+    <span class="c1"># build the list for the result</span>
+    <span class="n">carry</span>  <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">))):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">d</span> <span class="o">*</span> <span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">carry</span> <span class="c1"># here we can get a two-digit number</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span> <span class="o">%</span> <span class="mi">10</span>
+        <span class="n">carry</span> <span class="o">=</span> <span class="n">a</span> <span class="o">//</span> <span class="mi">10</span>
+    
+    <span class="c1"># possibly extend it with the carry!</span>
+    <span class="k">if</span> <span class="n">carry</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">carry</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digit_times_number</span><span class="p">(</span><span class="mi">6</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[7, 4, 0, 4]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digit_times_number</span><span class="p">(</span><span class="mi">5</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[6, 1, 7, 0]
+</pre></div>
+</div>
+</div>
+</div>
+<p>With this we can implement the school algorithm for multiplication:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">school_mul</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">))):</span>
+        <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">digit_times_number</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">)</span>
+       
+    <span class="nb">sum</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="nb">sum</span> <span class="o">=</span> <span class="n">plus</span><span class="p">(</span><span class="nb">sum</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">school_mul</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[6, 9, 1, 0, 4]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>How would you test this?<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Again we need to convince ourselves that the program works. Fortunately we have a function that helps already!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_fun_random</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">school_mul</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Passed all 100 test cases.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>What is the input to our program <code class="docutils literal notranslate"><span class="pre">school_mul</span></code>?</p>
+<p><em>Two lists of digits.</em></p>
+<p>What aspect of the input affects the number of operations done to calculate the result?</p>
+<p><em>The number of elements in the longest list determines how many turns of the loops are needed. This is what decides how many operations are needed.</em></p>
+<p>This is what we call <em>the size of the input</em>.</p>
+<p>We are interested on understanding the execution time as a function of the size of the input. There are theoretical methods for doing so but we can already now do experiments with our program. Here is a systematic experiment:</p>
+<ul class="simple">
+<li><p>run the program several times with input of a given size meassuring the execution time and taking the average</p></li>
+<li><p>double the size of the input and do the same</p></li>
+<li><p>double again and do the same</p></li>
+<li><p>do this several times</p></li>
+</ul>
+<p>And now? Well we can plot execution time versus size of input, but it can be difficult to see what function this is. If we assume that it will be a function of the form <span class="math notranslate nohighlight">\(time = size ^n\)</span> for some <span class="math notranslate nohighlight">\(n\)</span>, we need to find this <span class="math notranslate nohighlight">\(n\)</span>! There is a method for doing this and it is to calculate <strong>the slope</strong> of <span class="math notranslate nohighlight">\(\log(time)\)</span> as a function of <span class="math notranslate nohighlight">\(\log(size)\)</span>.</p>
+<p>In order to meassure execution time, there are functions in Python to get timestamps from the system in the library <code class="docutils literal notranslate"><span class="pre">time</span></code> that we need to import. Here are some useful functions, all of which are meant to be used to calculate differences between to instants:</p>
+<p><code class="docutils literal notranslate"><span class="pre">time.process_time_ns()</span></code> returns an integer: the sum of the system and user CPU time of the current process. It does not include time elapsed during sleep. It is process-wide by definition. The reference point of the returned value is undefined, so that only the difference between the results of two calls is valid.</p>
+<p><code class="docutils literal notranslate"><span class="pre">time.perf_counter_ns()</span></code> returns an integer: the value of a performance counter, i.e. a clock with the highest available resolution to measure a short duration. It does include time elapsed during sleep and is system-wide. The reference point of the returned value is undefined, so that only the difference between the results of two calls is valid.</p>
+<p><code class="docutils literal notranslate"><span class="pre">time.time_ns()</span></code>  returns time as an integer number of nanoseconds since the epoch.</p>
+<p>We will meassure execution time using  <code class="docutils literal notranslate"><span class="pre">time.process_time_ns()</span></code> in the following way:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span>
+<span class="n">school_mul</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="n">execution_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+</pre></div>
+</div>
+<p>Here is an example. Try it several times, you will see that you do not get always the same result. This is related to the fact that there other programs running in your computer. We deal with this by repeating the experiment and taking an average.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">))</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span>
+<span class="n">school_mul</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4243000
+</pre></div>
+</div>
+</div>
+</div>
+<p>We define a function for testing execution time of functions that can be applied to two lists of digits (for example <code class="docutils literal notranslate"><span class="pre">plus</span></code>, <code class="docutils literal notranslate"><span class="pre">minus</span></code> and <code class="docutils literal notranslate"><span class="pre">school_mul</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The argument size is for the length of the list of digits</span>
+<span class="c1"># The argument times is for the number of times to repeat the experiment</span>
+<span class="k">def</span> <span class="nf">test_et</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">))</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">size</span><span class="p">))</span>  
+    <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span>
+        <span class="n">f</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    <span class="k">return</span> <span class="nb">sum</span> <span class="o">/</span> <span class="n">times</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 100 experiments with numbers of 10 digits</span>
+<span class="n">test_et</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span> <span class="n">school_mul</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51290.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Can you say something about how execution time grows as the size of the input grows?</p>
+<p>Something like</p>
+<p><em>when the size of the input doubles (gets multiplied by 2) the execution time gets multiplied by …</em></p>
+</div>
+</div>
+<div class="section" id="a-recursive-algorithm">
+<h2>A recursive algorithm<a class="headerlink" href="#a-recursive-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>And now we look at a completely different algorithm. To begin with, just believe in it!</p>
+<p>We recommend that you read the book where the algorithm is explained. Here is the program in Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rec_mul</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="n">digit_times_number</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="n">digit_times_number</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="p">)</span>
+    
+    <span class="c1"># Make them the same length by adding leading 0s</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="o">+</span> <span class="n">m</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="n">n</span>
+
+    <span class="n">mid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    
+    <span class="n">a</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">mid</span><span class="p">]</span> <span class="c1"># the first half of m</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="n">mid</span><span class="p">:]</span>  <span class="c1"># the second half of m</span>
+     
+    <span class="n">c</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">mid</span><span class="p">]</span> <span class="c1"># the first half of n</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="n">mid</span><span class="p">:]</span>  <span class="c1"># the second half of n</span>
+    
+    <span class="c1"># turning mid into the power of 2 we need.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="n">mid</span><span class="o">+=</span><span class="mi">1</span>
+       
+    <span class="c1"># Four recursive calls with lists shorter than m and n!</span>
+    <span class="n">z0</span> <span class="o">=</span> <span class="n">rec_mul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mid</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+    <span class="n">z1</span> <span class="o">=</span> <span class="n">rec_mul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="n">mid</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+    <span class="n">z2</span> <span class="o">=</span> <span class="n">rec_mul</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">mid</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+    <span class="n">z3</span> <span class="o">=</span> <span class="n">rec_mul</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>  
+    
+    <span class="k">return</span> <span class="n">plus</span><span class="p">(</span><span class="n">z0</span><span class="p">,</span> <span class="n">plus</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">plus</span><span class="p">(</span><span class="n">z2</span><span class="p">,</span><span class="n">z3</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_fun_random</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">rec_mul</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Passed all 100 test cases.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_et</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="n">rec_mul</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>234570.0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="karatsuba-s-algorithm">
+<h2>Karatsuba’s algorithm<a class="headerlink" href="#karatsuba-s-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>Finally, a great insight is that one recursive calls can be eliminated!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">karatsuba_mul</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="n">digit_times_number</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="n">digit_times_number</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="p">)</span>
+
+    <span class="c1"># Make them the same length by adding leading 0s</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="o">+</span> <span class="n">m</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="n">n</span>
+
+    <span class="n">mid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    
+    <span class="n">a</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">mid</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="n">mid</span><span class="p">:]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">mid</span><span class="p">]</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="n">mid</span><span class="p">:]</span>
+    
+    <span class="c1"># turning mid into the right power of 2.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="n">mid</span><span class="o">+=</span><span class="mi">1</span>
+        
+    <span class="n">z0</span> <span class="o">=</span> <span class="n">karatsuba_mul</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">z1</span> <span class="o">=</span> <span class="n">karatsuba_mul</span><span class="p">(</span><span class="n">plus</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">),</span> <span class="n">plus</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">c</span><span class="p">))</span> 
+    <span class="n">z2</span> <span class="o">=</span> <span class="n">karatsuba_mul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>  
+    <span class="n">p</span> <span class="o">=</span> <span class="n">minus</span><span class="p">(</span><span class="n">minus</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">),</span><span class="n">z0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">plus</span><span class="p">(</span><span class="n">z2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mid</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">plus</span><span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="n">mid</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">z0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_fun_random</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">karatsuba_mul</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Passed all 100 test cases.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_et</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="n">karatsuba_mul</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>326370.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>You should use the next cell to experiment with small numbers (100 digits) and big numbers (2000 digits).</p>
+<p>As it is it will take some time: it meassures the execution time of Karatsuba’s multiplication for numbers with 2048 digits, meassures the execution time of the school algorithm for numbers with 3000 digits and takes their quotient.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_et</span><span class="p">(</span><span class="mi">2048</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">karatsuba_mul</span><span class="p">)</span> <span class="o">/</span> <span class="n">test_et</span><span class="p">(</span><span class="mi">2048</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">school_mul</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8137492561108108
+</pre></div>
+</div>
+</div>
+</div>
+<p>So it seems that for short numbers, school multiplication is better. lets try to combine them by cutting off recursion before getting to 1 digit.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">karatsuba_mul_cutoff</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span> <span class="k">return</span> <span class="n">school_mul</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="c1"># Make them the same length by adding leading 0s</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="o">+</span> <span class="n">m</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> <span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="n">n</span>
+
+    <span class="n">mid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    
+    <span class="n">a</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">mid</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="n">mid</span><span class="p">:]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">mid</span><span class="p">]</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="n">mid</span><span class="p">:]</span>
+    
+    <span class="c1"># turning mid into the right power of 2.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="n">mid</span><span class="o">+=</span><span class="mi">1</span>
+        
+    <span class="n">z0</span> <span class="o">=</span> <span class="n">karatsuba_mul_cutoff</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">z1</span> <span class="o">=</span> <span class="n">karatsuba_mul_cutoff</span><span class="p">(</span><span class="n">plus</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">),</span> <span class="n">plus</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">c</span><span class="p">))</span> 
+    <span class="n">z2</span> <span class="o">=</span> <span class="n">karatsuba_mul_cutoff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>  
+    <span class="n">p</span> <span class="o">=</span> <span class="n">minus</span><span class="p">(</span><span class="n">minus</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">),</span><span class="n">z0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">plus</span><span class="p">(</span><span class="n">z2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mid</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">plus</span><span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="n">mid</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">z0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_fun_random</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">karatsuba_mul_cutoff</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Passed all 100 test cases.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_et</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">karatsuba_mul_cutoff</span><span class="p">)</span> <span class="o">/</span> <span class="n">test_et</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">school_mul</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2827593776710774
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">test_et</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">karatsuba_mul_cutoff</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_et</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">school_mul</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>362201000.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1774426000.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test case from the book Algorithms illuminated</span>
+<span class="n">e</span>  <span class="o">=</span> <span class="mi">2718281828459045235360287471352662497757247093699959574966967627</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="mi">3141592653589793238462643383279502884197169399375105820974944592</span> 
+
+<span class="n">el</span>  <span class="o">=</span> <span class="n">from_int</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">pil</span> <span class="o">=</span> <span class="n">from_int</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">karatsuba_mul</span><span class="p">(</span><span class="n">el</span><span class="p">,</span><span class="n">pil</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[8, 5, 3, 9, 7, 3, 4, 2, 2, 2, 6, 7, 3, 5, 6, 7, 0, 6, 5, 4, 6, 3, 5, 5, 0, 8, 6, 9, 5, 4, 6, 5, 7, 4, 4, 9, 5, 0, 3, 4, 8, 8, 8, 5, 3, 5, 7, 6, 5, 1, 1, 4, 9, 6, 1, 8, 7, 9, 6, 0, 1, 1, 2, 7, 0, 6, 7, 7, 4, 3, 0, 4, 4, 8, 9, 3, 2, 0, 4, 8, 4, 8, 6, 1, 7, 8, 7, 5, 0, 7, 2, 2, 1, 6, 2, 4, 9, 0, 7, 3, 0, 1, 3, 3, 7, 4, 8, 9, 5, 8, 7, 1, 9, 5, 2, 8, 0, 6, 5, 8, 2, 7, 2, 3, 1, 8, 4]
+8539734222673567065463550869546574495034888535765114961879601127067743044893204848617875072216249073013374895871952806582723184
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./algs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="recursion.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Understanding recursion</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="theory-exercises-1.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Theory exercises 1</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Veronica Gaspes<br/>
+    
+        &copy; Copyright none.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

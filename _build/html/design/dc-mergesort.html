@@ -1,0 +1,806 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mergesort &#8212; Python - a gateway to machine learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Counting inversions" href="dc-inversions.html" />
+    <link rel="prev" title="Lecture 3" href="dc-intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/panda.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python - a gateway to machine learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   About these lecture notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Overview of the course
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Algorithms and their execution time behaviour
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algs/intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../algs/algs-lecture.html">
+   Lecture 1
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/loops.html">
+     Understanding
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       for
+      </span>
+     </code>
+     loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/primes.html">
+     Prime numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/recursion.html">
+     Understanding recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/mul.html">
+     Three algorithms for integer multiplication
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/theory-exercises-1.html">
+     Theory exercises 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/programming-exercises-1.html">
+     Programming exercises 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/programming-solutions-1.html">
+     Solutions to programming exercises 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../algs/execution-time.html">
+   Lecture 2
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/et.html">
+     Order and sorting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/math-and-experiments.html">
+     Measuring and estimating execution time behaviour
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Algorithm design paradigms
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="dc-intro.html">
+   Lecture 3
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Mergesort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dc-inversions.html">
+     Counting inversions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="dp-intro.html">
+   Lecture 4
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dp-fib.html">
+     Fibonacci numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dp-wis.html">
+     Maximum independent set for weighted path graphs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dp-knapsack.html">
+     The knapsack problem
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data structures
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ds/intro.html">
+   Data structures
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ds/lecture5.html">
+   Lecture 5
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/lists.html">
+     Lists in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/classes.html">
+     Classes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/queues.html">
+     Queues
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/design/dc-mergesort.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fdesign/dc-mergesort.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/design/dc-mergesort.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quiz">
+   Quiz
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-and-exploring-execution-time">
+   Testing and exploring execution time
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#notice">
+     Notice
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Mergesort</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quiz">
+   Quiz
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-and-exploring-execution-time">
+   Testing and exploring execution time
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#notice">
+     Notice
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="mergesort">
+<h1>Mergesort<a class="headerlink" href="#mergesort" title="Permalink to this headline">¶</a></h1>
+<p>In the chapter Order and sorting we saw some algorithms for sorting arrays (selection  sort, insertion sort, bubble sort) that we said we would be <em>discard</em> given that they did not work well for large arrays. You were encouraged to test Python’s sorting algorithm, selection sort and insertion sort to experience how long it could take for large arrays. You were also encouraged in the section Measuring and estimating execution time to plot the execution time of the programs.</p>
+<p>Now we will discuss the algorithm that lies behind Python’s own sortin algorithm: Mergesort.  When we are done you will see that the algorithm is <em>almost</em> linear (linearithmic or <span class="math notranslate nohighlight">\(n \, \)</span>log<span class="math notranslate nohighlight">\( \,n\)</span>). And this is amazing: you can sort an array almost as fast as you can fill it with elements! Tim Roughgarden calls this a <em>for-free primitive</em>: a component you can use in algorithms that need sorted arrays in order to work.</p>
+<p>Recall the three steps of Divide &amp; Conquer:</p>
+<ol class="simple">
+<li><p><em>Divide</em> the input into smaller parts to get subproblems</p></li>
+<li><p><em>Conquer</em> the subproblems  recursively.</p></li>
+<li><p><em>Combine</em> the solutions to the subproblems into a solution for the original problem.</p></li>
+</ol>
+<p>and try the more immediate way of dividing the input.</p>
+<p>What <em>is</em> the input? The problem we are trying to solve is <em>sorting an array</em>, so the input is the array to be sorted. We do step 1) in constant time: divide the input into two halves: we just need to pick the middle index!</p>
+<p>Given this, do step 2) that is given: sort each of the two halves recursively!</p>
+<p>And now to step 3). I hope you have already realized that we cannot just put the two sorted halves together! Here is an example of two halves that are sorted but that together do not form a sorted array:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>So, say you have the two sorted halves <code class="docutils literal notranslate"><span class="pre">[1,3,5]</span></code> and <code class="docutils literal notranslate"><span class="pre">[2,4,6]</span></code>, can we think of an efficient way of combining them into a solution to sorting an array with all these elements? Well yes, if you have an extra array where to put the elements: then you can go from left to right in both halves and pick the smallest element, whether from the first half or from the second one. This idea is called <em>merging</em> the two halves.</p>
+<p>Here is a program, <code class="docutils literal notranslate"><span class="pre">book_merge</span></code> that implements this idea. We follow the book closely (Section 1.4.5) and write it in a way that takes two arrays as arguments and produces an array as result. The program has some more detail than the figure in Section 1.4.5. To understand it you have to read the last paragraph of the section where it says that you have to take care of the cases where the traversal of C or D <em>falls off the end</em>.</p>
+<p>The important thing for the algorithm to work is that the two input arrays are themselves sorted.</p>
+<p>Later on we will see how to adapt it in order to sort <em>in place</em> (modifying the array).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">book_merge</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+    
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># i is the index for c</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># j is the index for d</span>
+    
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span> <span class="c1"># k is the index for b</span>
+        
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="c1"># fell off the end of c: just copy the elements in d</span>
+            <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+        <span class="k">elif</span> <span class="n">j</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="c1"># fell off the end of d: just copy the elements of c</span>
+            <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+        <span class="k">elif</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="c1"># still inside both c and d!</span>
+            <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+    <span class="k">return</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">book_merge</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5, 6]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="quiz">
+<h2>Quiz<a class="headerlink" href="#quiz" title="Permalink to this headline">¶</a></h2>
+<p>What is the asymptotic running time of the code for <code class="docutils literal notranslate"><span class="pre">book_merge</span></code>?</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(\)</span>log<span class="math notranslate nohighlight">\( \, n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(n^2)\)</span></p></li>
+</ol>
+<p>So, back to the Divide &amp; Conquer idea:</p>
+<p>Given an array <code class="docutils literal notranslate"><span class="pre">a</span></code>, to sort <code class="docutils literal notranslate"><span class="pre">a</span></code></p>
+<ol class="simple">
+<li><p>split it into two halves,</p></li>
+<li><p>recursively sort each of the halves,</p></li>
+<li><p>merge the two sorted halves</p></li>
+</ol>
+<p>In order to do everything <em>in place</em> we will use indices to mark the different parts of the array and we will create an auxiliary array to support merging. We use an auxiliary function to use all these arguments. We follow the convention in Python of using names that start with underscore for auxiliary functions. And remember, we want to reorder the elements of <code class="docutils literal notranslate"><span class="pre">a</span></code>, we do not want to return a sorted array.</p>
+<p>The Divide &amp; Conquer algorithm is implemented in the auxiliary function <code class="docutils literal notranslate"><span class="pre">_sort</span></code>.</p>
+<p>Observe that also <code class="docutils literal notranslate"><span class="pre">merge</span></code> works with indices to mark the parts it works with. And that it does not return a sorted array, instead it updates <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mergesort</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">aux</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="n">_sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">aux</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">_sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">aux</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">hi</span> <span class="o">-</span> <span class="n">lo</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># base case: nothing left to do</span>
+        <span class="k">return</span>
+    <span class="c1"># To the meat of the algorithm. Notice the two recursive calls.</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="c1"># Step 1) in D&amp;C</span>
+    <span class="n">_sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">aux</span><span class="p">)</span> <span class="c1"># Step 2) in D&amp;C</span>
+    <span class="n">_sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">aux</span><span class="p">)</span> <span class="c1"># Step 2) in D&amp;C</span>
+    <span class="n">_merge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">aux</span><span class="p">)</span> <span class="c1"># Step 3) in D&amp;C</span>
+    
+    
+<span class="k">def</span> <span class="nf">_merge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">aux</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">hi</span> <span class="o">-</span> <span class="n">lo</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">lo</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">mid</span>
+    <span class="c1"># use aux[0:n] to merge the two parts a[lo:mid] and a[mid:hi]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">mid</span><span class="p">:</span>
+            <span class="n">aux</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">j</span> <span class="o">==</span> <span class="n">hi</span><span class="p">:</span>
+            <span class="n">aux</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">aux</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">aux</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># update a with the merged parts</span>
+    <span class="n">a</span><span class="p">[</span><span class="n">lo</span><span class="p">:</span><span class="n">hi</span><span class="p">]</span> <span class="o">=</span> <span class="n">aux</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">mergesort</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5, 6]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="testing-and-exploring-execution-time">
+<h2>Testing and exploring execution time<a class="headerlink" href="#testing-and-exploring-execution-time" title="Permalink to this headline">¶</a></h2>
+<p>In order to do an asymptotic analysis you need to read on the Master method. This is Chapter 4 in Part 1 of  <a class="reference external" href="http://algorithmsilluminated.org">Algorithms Illuminated</a>.</p>
+<p>In this lecture notes we will use the fact that we have the program and plot execution time versus size of input.</p>
+<p>We use functions we already used before so we do not explain them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_number_list</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span><span class="n">upper</span><span class="p">,</span><span class="n">short</span><span class="p">,</span><span class="n">long</span><span class="p">):</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">short</span><span class="p">,</span><span class="n">long</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span><span class="n">upper</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">)]</span>
+
+<span class="k">def</span> <span class="nf">test_sorting_program_once</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">p</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">!=</span> <span class="n">a</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;expected&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;but found&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">test_sorting_program</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">test_sorting_program_once</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">random_number_list</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sort 100 random arrays using mergesort and check whether it is sorted using Python&#39;s sort.</span>
+<span class="n">test_sorting_program</span><span class="p">(</span><span class="n">mergesort</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate running time data</span>
+<span class="k">def</span> <span class="nf">running_time_data</span><span class="p">(</span><span class="n">start_size</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">start_size</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">times</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">times</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span> 
+        <span class="n">p</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">*=</span> <span class="n">step</span>
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the sizes and execution times for 10 random arrays of lengths 100, 200, 400, ..., 51200.</span>
+<span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="n">running_time_data</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="n">mergesort</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Prepare the tool:</span>
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot the points for time as function of size:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Decorate the graph:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span>
+       <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Running time as function of array length&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a grid:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Display:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dc-mergesort_12_0.png" src="../_images/dc-mergesort_12_0.png" />
+</div>
+</div>
+<p>This looks almost linear. We cannot say much with this simple experiment. You will do a better experiment in the first assignment, Laboration 1. In Laboration 1 you will see yet another sorting algorithm also designed using Divide &amp; Conquer. The algorithm is <em>quicksort</em> and has a more complicated step 1) but a very simple step 3): do nothing! Step 1) is called <em>partition</em> and it just moves to the left all elements smaller than a selected element in the array (called the pivot) and to the right all elements larger than the pivot. This can be done in linear time.</p>
+<p>If you read the book and / or apply the Master method yourself you will find out that the asymptotic time is <span class="math notranslate nohighlight">\(n \, \)</span>log<span class="math notranslate nohighlight">\( \, n\)</span>.  So, lets plot this function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The x values:</span>
+<span class="n">x</span>  <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">51200</span><span class="p">)</span>
+
+<span class="c1"># The y values for the linearithmic function x * log_2(x)</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+
+
+<span class="c1"># Prepare the tool:</span>
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot the points for fx:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
+
+
+
+<span class="c1"># Decorate the graph:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;f(x)&#39;</span><span class="p">,</span>
+       <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Linearithmic function&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a grid:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Display:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dc-mergesort_14_0.png" src="../_images/dc-mergesort_14_0.png" />
+</div>
+</div>
+<p>The values in the y-axis are in another range, but the  curves are very similar!</p>
+<div class="section" id="notice">
+<h3>Notice<a class="headerlink" href="#notice" title="Permalink to this headline">¶</a></h3>
+<p>An asymptotic behaviour of <span class="math notranslate nohighlight">\(n \, \)</span>log<span class="math notranslate nohighlight">\( \, n\)</span> is what in the book is called a <em>for free primitive</em>: you can use it in your algorithms, it will not spoil them.</p>
+<p>One way of seeing this is that just filling in the array is already linear! And <span class="math notranslate nohighlight">\(n \, \)</span>log<span class="math notranslate nohighlight">\( \, n\)</span> is <em>almost linear</em>: asymptotically $<span class="math notranslate nohighlight">\(log\)</span> , n$ is almost a constant!</p>
+<p>And now think: mergesort can sort an array as fast as filling in the array!</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./design"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="dc-intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Lecture 3</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="dc-inversions.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Counting inversions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Veronica Gaspes<br/>
+    
+        &copy; Copyright none.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

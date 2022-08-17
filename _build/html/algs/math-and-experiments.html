@@ -1,0 +1,1553 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Measuring and estimating execution time behaviour &#8212; Python - a gateway to machine learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction" href="../design/intro.html" />
+    <link rel="prev" title="Order and sorting" href="et.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/panda.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python - a gateway to machine learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   About these lecture notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Overview of the course
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Algorithms and their execution time behaviour
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="algs-lecture.html">
+   Lecture 1
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="loops.html">
+     Understanding
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       for
+      </span>
+     </code>
+     loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="primes.html">
+     Prime numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="recursion.html">
+     Understanding recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="mul.html">
+     Three algorithms for integer multiplication
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="theory-exercises-1.html">
+     Theory exercises 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="programming-exercises-1.html">
+     Programming exercises 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="programming-solutions-1.html">
+     Solutions to programming exercises 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="execution-time.html">
+   Lecture 2
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="et.html">
+     Order and sorting
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Measuring and estimating execution time behaviour
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Algorithm design paradigms
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../design/intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../design/dc-intro.html">
+   Lecture 3
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dc-mergesort.html">
+     Mergesort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dc-inversions.html">
+     Counting inversions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../design/dp-intro.html">
+   Lecture 4
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dp-fib.html">
+     Fibonacci numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dp-wis.html">
+     Maximum independent set for weighted path graphs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dp-knapsack.html">
+     The knapsack problem
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data structures
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ds/intro.html">
+   Data structures
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ds/lecture5.html">
+   Lecture 5
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/lists.html">
+     Lists in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/classes.html">
+     Classes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/queues.html">
+     Queues
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/algs/math-and-experiments.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Falgs/math-and-experiments.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/algs/math-and-experiments.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Measuring and estimating execution time behaviour
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#experiments">
+     Experiments
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-it-is-that-we-want-to-observe-in-order-to-collect-data">
+     What it is that we want to observe in order to collect data?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#understanding-the-math-for-algorithm-analysis">
+   Understanding the math for algorithm analysis
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constant-functions">
+     Constant functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-functions">
+     Linear functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratic-functions">
+     Quadratic functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logarithmic-functions">
+     Logarithmic functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ordering-functions-according-to-how-fast-they-grow">
+     Ordering functions according to how fast they grow
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#experiments-with-asymptotic-running-time">
+   Experiments with asymptotic running time
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#searching-one-array">
+     Searching one array
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#quiz">
+       Quiz
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#searching-two-arrays">
+     Searching two arrays
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Quiz
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#checking-for-a-common-element">
+     Checking for a common element
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Quiz
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#checking-for-duplicates">
+     Checking for duplicates
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id3">
+       Quiz
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sorting">
+     Sorting
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Measuring and estimating execution time behaviour</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Measuring and estimating execution time behaviour
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#experiments">
+     Experiments
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-it-is-that-we-want-to-observe-in-order-to-collect-data">
+     What it is that we want to observe in order to collect data?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#understanding-the-math-for-algorithm-analysis">
+   Understanding the math for algorithm analysis
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constant-functions">
+     Constant functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-functions">
+     Linear functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratic-functions">
+     Quadratic functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logarithmic-functions">
+     Logarithmic functions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ordering-functions-according-to-how-fast-they-grow">
+     Ordering functions according to how fast they grow
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#experiments-with-asymptotic-running-time">
+   Experiments with asymptotic running time
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#searching-one-array">
+     Searching one array
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#quiz">
+       Quiz
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#searching-two-arrays">
+     Searching two arrays
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Quiz
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#checking-for-a-common-element">
+     Checking for a common element
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Quiz
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#checking-for-duplicates">
+     Checking for duplicates
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id3">
+       Quiz
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sorting">
+     Sorting
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="measuring-and-estimating-execution-time-behaviour">
+<h1>Measuring and estimating execution time behaviour<a class="headerlink" href="#measuring-and-estimating-execution-time-behaviour" title="Permalink to this headline">¶</a></h1>
+<p>We write programs to solve computational problems. In this section we are interested not so much in what the program calculates but instead in something that we can observe from the program execution: how much time execution takes.</p>
+<div class="section" id="experiments">
+<h2>Experiments<a class="headerlink" href="#experiments" title="Permalink to this headline">¶</a></h2>
+<p>We start by designing experiments that expose the execution time behaviour of programs. We borrrow ideas from the book <a class="reference external" href="https://introcs.cs.princeton.edu/python/home/">Introduction to Programming in Python</a>.</p>
+<p>Notice that the experiments we describe are actually implemented as <em>programs</em> that generate data for us to analyse and draw conclusions:</p>
+<ul class="simple">
+<li><p>We start with a program <span class="math notranslate nohighlight">\(P\)</span> that solves a problem,</p></li>
+<li><p>we then write a program that <em>uses</em> <span class="math notranslate nohighlight">\(P\)</span> to solve many instances of the problem to be able to collect data about the execution time.</p></li>
+<li><p>We analyse the data to draw conclusions.</p></li>
+</ul>
+<p>We hope that this approach contributes to develop your programming skills and that you get to know fragments of Python that you might not encounter otherwise.</p>
+</div>
+<div class="section" id="what-it-is-that-we-want-to-observe-in-order-to-collect-data">
+<h2>What it is that we want to observe in order to collect data?<a class="headerlink" href="#what-it-is-that-we-want-to-observe-in-order-to-collect-data" title="Permalink to this headline">¶</a></h2>
+<p>We are interested in <strong>time</strong>. We want quantitative measurments of the time it takes for a program to execute: measure the execution time (running time) of a program. In Python there is support for doing so in the module <code class="docutils literal notranslate"><span class="pre">time</span></code> documented in <a class="reference external" href="https://docs.python.org/3/library/time.html">time</a>. We are interested in functions that measure time our program is running. We believe the closest we can get to this is the function</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">process_time</span><span class="p">()</span> 
+</pre></div>
+</div>
+<p>that, according to the documentation returns a float with <em>the value (in fractional seconds) of the sum of the system and user CPU time of the current process. It does not include time elapsed during sleep. It is process-wide by definition. The reference point of the returned value is undefined, so that only the difference between the results of two calls is valid.</em></p>
+<p>We can also use</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">process_time_ns</span><span class="p">()</span> 
+</pre></div>
+</div>
+<p>that returns an integer with the number of nanoseconds. In both cases, we need to establish a starting point for the measurement and then take the difference with the point where the measurement should end.</p>
+<p>Here is a first example with two ways of calculating the sum of all squares up to a bound:</p>
+<div class="math notranslate nohighlight">
+\[ \sum_{i = 0}^{i &lt; bound}{i ^2} \]</div>
+<p>In the first version we use <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">*</span> <span class="pre">i</span></code> to calculate <span class="math notranslate nohighlight">\(i^2\)</span>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">value1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+    <span class="n">value1</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">i</span>
+</pre></div>
+</div>
+<p>In the second version we use <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">**</span> <span class="pre">2</span></code> instead:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">value2</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+    <span class="n">value2</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>In both versions we have added code to also calculate the running time:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bound</span> <span class="o">=</span> <span class="mi">10000000</span>
+
+<span class="n">start1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span> 
+<span class="n">value1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+    <span class="n">value1</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">i</span>
+<span class="n">running_time1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span> <span class="o">-</span> <span class="n">start1</span>
+
+<span class="n">start2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span> 
+<span class="n">value2</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+    <span class="n">value2</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">running_time2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span> <span class="o">-</span> <span class="n">start2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">running_time1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">value2</span><span class="p">,</span> <span class="n">running_time2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>333333283333335000000 1175308000
+333333283333335000000 2729498000
+</pre></div>
+</div>
+</div>
+</div>
+<p>When you test this program you will observe two things:</p>
+<ol class="simple">
+<li><p>Of course <code class="docutils literal notranslate"><span class="pre">value1</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">value2</span></code> for a given bound.  But the running times are not the same: the fragment that uses <code class="docutils literal notranslate"><span class="pre">**</span> <span class="pre">2</span></code> takes longer time.</p></li>
+<li><p>Running the program several times for a given bound yields different values of running time. This is due to the fact that the process that is measured is involved in more than just our code cell, it is running this notebook which involves autosaving and a lot of other stuff.</p></li>
+<li><p>If we increase the bound then the execution time increases.</p></li>
+</ol>
+<p>We now program a function that can allow us to compare the two execution times for different bounds. Observe that we use <code class="docutils literal notranslate"><span class="pre">process_time()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">process_time_ns()</span></code> because we will print the quotient.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">running_time_experiment_sum_squares</span><span class="p">(</span><span class="n">initial_bound</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
+    
+    <span class="n">bound</span> <span class="o">=</span> <span class="n">initial_bound</span>
+
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+        
+        <span class="n">start1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span> 
+        <span class="n">value1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+            <span class="n">value1</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">i</span>
+        <span class="n">running_time1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start1</span>
+
+        <span class="n">start2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span> 
+        <span class="n">value2</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+            <span class="n">value2</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">running_time2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start2</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="n">bound</span><span class="p">,</span> 
+              <span class="n">running_time1</span><span class="p">,</span> 
+              <span class="n">running_time2</span><span class="p">,</span> 
+              <span class="n">running_time2</span> <span class="o">/</span> <span class="n">running_time1</span><span class="p">)</span>
+        
+        <span class="n">bound</span> <span class="o">*=</span> <span class="n">step</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start with a bound of 1000, double the bound each time and do it 15 times.</span>
+
+<span class="n">running_time_experiment_sum_squares</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000 7.800000000024454e-05 0.0002489999999992776 3.192307692288422
+2000 0.00016899999999964166 0.00047500000000066933 2.8106508875838845
+4000 0.0003069999999993911 0.000956000000000401 3.114006514665463
+8000 0.0006310000000002702 0.0019279999999994857 3.055467511883772
+16000 0.0012239999999996698 0.003866000000000369 3.1584967320272974
+32000 0.0025050000000002015 0.007817999999999437 3.120958083831859
+64000 0.004902999999999658 0.015666000000000402 3.1951866204367727
+128000 0.009971999999999426 0.03125800000000023 3.134576815082434
+256000 0.019890999999999437 0.06261500000000009 3.1479060881806777
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>512000 0.039985999999999855 0.12565699999999946 3.1425248837092963
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024000 0.08093099999999964 0.24947799999999987 3.082601228206756
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2048000 0.1596099999999998 0.4975039999999993 3.1169976818495075
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4096000 0.3180069999999997 0.9952259999999997 3.129572619470643
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8192000 0.6361670000000004 1.9834230000000002 3.1177709626560306
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16384000 1.2676909999999992 3.9625650000000014 3.125812993860494
+</pre></div>
+</div>
+</div>
+</div>
+<p>In my system the results show that the use of <code class="docutils literal notranslate"><span class="pre">**</span> <span class="pre">2</span></code> makes the program about 3 times slower compared to using <code class="docutils literal notranslate"><span class="pre">*</span></code>. This relation does not seem to change as the bound grows.</p>
+<p>The total execution time of each fragment grows when the bound grows, but it <em>grows at the same rate</em> for both fragments.</p>
+<p>Is it always like this? Well, no! Lets try using <code class="docutils literal notranslate"><span class="pre">+</span></code> and a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop instead of times in yet another fragment in our experiment:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">running_time_experiment_sum_squares_v2</span><span class="p">(</span><span class="n">initial_bound</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
+    
+    <span class="n">bound</span> <span class="o">=</span> <span class="n">initial_bound</span>
+
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+        
+        <span class="n">start1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span> 
+        <span class="n">value1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+            <span class="n">value1</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">i</span>
+        <span class="n">running_time1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start1</span>
+
+        <span class="n">start2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span> 
+        <span class="n">value2</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+            <span class="n">value2</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">running_time2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start2</span>
+        
+        <span class="n">start3</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span> 
+        <span class="n">value3</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bound</span><span class="p">):</span>
+            <span class="n">sq</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                <span class="n">sq</span> <span class="o">+=</span> <span class="n">i</span>
+            <span class="n">value2</span> <span class="o">+=</span> <span class="n">sq</span>
+        <span class="n">running_time3</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start3</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="n">bound</span><span class="p">,</span> 
+              <span class="n">running_time1</span><span class="p">,</span> 
+              <span class="n">running_time2</span><span class="p">,</span> 
+              <span class="n">running_time3</span><span class="p">,</span> 
+              <span class="n">running_time2</span> <span class="o">/</span> <span class="n">running_time1</span><span class="p">,</span> 
+              <span class="n">running_time3</span> <span class="o">/</span> <span class="n">running_time1</span><span class="p">)</span>
+        
+        <span class="n">bound</span> <span class="o">*=</span> <span class="n">step</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start with a bound of 1000, double the bound each time and do it 5 times.</span>
+
+<span class="n">running_time_experiment_sum_squares_v2</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000 7.500000000071338e-05 0.00023399999999895726 0.02278000000000091 3.11999999995642 303.73333333045645
+2000 0.00017200000000094917 0.0005030000000001422 0.09452600000000011 2.9244186046358513 549.5697674388283
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4000 0.0003109999999999502 0.000978999999999175 0.3872 3.1479099678435105 1245.0160771706173
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8000 0.0006230000000009284 0.002007000000000758 1.564407000000001 3.221508828246818 2511.086677363836
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16000 0.001228000000001117 0.003954000000000235 6.391992000000002 3.2198697068376534 5205.205211721651
+</pre></div>
+</div>
+</div>
+</div>
+<p>I hope you can observe that the third approach is not only <em>much</em> slower: it is also the case that when the bound grows the execution time grows much faster! In my system, for a bound of 1000 it is 300 times slower and for a bound of 16000 it is 5000 times slower!</p>
+<p>This should make you curious about exploring <em>execution time</em> <strong>as a function of</strong> some characteristic of the input that measures <em>the problem size</em>.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="understanding-the-math-for-algorithm-analysis">
+<h1>Understanding the math for algorithm analysis<a class="headerlink" href="#understanding-the-math-for-algorithm-analysis" title="Permalink to this headline">¶</a></h1>
+<p>The book <a class="reference external" href="http://www.algorithmsilluminated.org">Algorithms Illuminated</a> explains <em>asymptotic notation</em>, the mathematical formalism that is used for analysing the execution time of algorithms.</p>
+<p>We now take a look at these concepts and illustrate them with programs that allow you to experiment with each of the concepts. Our hope is that this section will help you understand the math and also get some practice in using yet more fragments of Python while developing your programming skills even further.</p>
+<p>We start by exploring how some functions behave when their input become larger and larger.</p>
+<div class="section" id="constant-functions">
+<h2>Constant functions<a class="headerlink" href="#constant-functions" title="Permalink to this headline">¶</a></h2>
+<p>These are functions that have the same value for all inputs. Here are some examples:
+$<span class="math notranslate nohighlight">\( f(x) = 3\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[ g(x) = -34\]</div>
+<div class="math notranslate nohighlight">
+\[ h(x) = 1234567,89\]</div>
+<p>Here is a little tool to plot functions in Python. We need the module <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The x values:</span>
+<span class="n">x</span>  <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># The y values for the constant functions 3 and -34</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">gx</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">34</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+
+<span class="c1"># Prepare the tool:</span>
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot the points for fx and gx:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">gx</span><span class="p">)</span>
+
+<span class="c1"># Decorate the graph:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;f(x), g(x)&#39;</span><span class="p">,</span>
+       <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Constant functions&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a grid:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Display:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/math-and-experiments_12_0.png" src="../_images/math-and-experiments_12_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="linear-functions">
+<h2>Linear functions<a class="headerlink" href="#linear-functions" title="Permalink to this headline">¶</a></h2>
+<p>We will only consider linear functions that are grow as the argument grows: positive slope.</p>
+<div class="math notranslate nohighlight">
+\[f(x) = 4x + 10\]</div>
+<div class="math notranslate nohighlight">
+\[g(x) = 2x + 100\]</div>
+<p>The slope is the coefficient of <span class="math notranslate nohighlight">\(x\)</span>. The other number is the point where the line crosses the <span class="math notranslate nohighlight">\(y\)</span>-axis (when <span class="math notranslate nohighlight">\(x\)</span> is <span class="math notranslate nohighlight">\(0\)</span>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The x values:</span>
+<span class="n">x</span>  <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># The y values for the linear function 4x + 10 and 2x + 100</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">10</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">gx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">100</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+
+
+<span class="c1"># Prepare the tool:</span>
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot the points for fx and gx:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gx</span><span class="p">)</span>
+
+
+<span class="c1"># Decorate the graph:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;f(x), g(x)&#39;</span><span class="p">,</span>
+       <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Linear functions&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a grid:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Display:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/math-and-experiments_14_0.png" src="../_images/math-and-experiments_14_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="quadratic-functions">
+<h2>Quadratic functions<a class="headerlink" href="#quadratic-functions" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[ f(x) = 3x^2 + 4x + 10 \]</div>
+<div class="math notranslate nohighlight">
+\[ g(x) = 5x^2 + 4x + 10\]</div>
+<p>Make sure you notice the values that the functions take in the <span class="math notranslate nohighlight">\(y\)</span>-axis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The x values:</span>
+<span class="n">x</span>  <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># The y values for the quadratic function 3x^2 + 4x + 10 and 5x^2 + 4x + 10</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">10000</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">gx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">10</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+
+
+<span class="c1"># Prepare the tool:</span>
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot the points for fx and gx:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gx</span><span class="p">)</span>
+
+
+<span class="c1"># Decorate the graph:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;f(x), g(x)&#39;</span><span class="p">,</span>
+       <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quadratic functions&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a grid:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Display:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/math-and-experiments_16_0.png" src="../_images/math-and-experiments_16_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="logarithmic-functions">
+<h2>Logarithmic functions<a class="headerlink" href="#logarithmic-functions" title="Permalink to this headline">¶</a></h2>
+<p>We have illustrated functions that do not grow (constant functions), functions that grow with a constant slope (linear functions) and functions that grow with increasing slope (quadratic functions).</p>
+<p>Are there functions that grow with a decreasing slope? Well yes: logarithmic functions:</p>
+<div class="math notranslate nohighlight">
+\[ f(x) = \ln(x) \]</div>
+<div class="math notranslate nohighlight">
+\[ g(x) = \log_2(x) + 5\]</div>
+<p>We now need the <code class="docutils literal notranslate"><span class="pre">math</span></code>module to be able to use the logarithm functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The x values:</span>
+<span class="n">x</span>  <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># The y values for the logarithmic functions ln(x) and log_2(x) + 5</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">gx</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+
+
+<span class="c1"># Prepare the tool:</span>
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot the points for fx and gx:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gx</span><span class="p">)</span>
+
+
+<span class="c1"># Decorate the graph:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;f(x), g(x)&#39;</span><span class="p">,</span>
+       <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Logarithmic functions&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a grid:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Display:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/math-and-experiments_19_0.png" src="../_images/math-and-experiments_19_0.png" />
+</div>
+</div>
+<p>It is interesting to see what happens of we put all of them in one plot!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The x values:</span>
+<span class="n">x</span>  <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># The y values</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">34</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">f3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">10</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">f4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">100</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">f5</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">10000</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">f6</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">10</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">f7</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">f8</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+
+
+<span class="c1"># Prepare the tool:</span>
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot the points for f1 ... f8:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f8</span><span class="p">)</span>
+
+
+<span class="c1"># Decorate the graph:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;f(x)&#39;</span><span class="p">,</span>
+       <span class="n">title</span><span class="o">=</span><span class="s1">&#39;functions&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a grid:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Display:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/math-and-experiments_21_0.png" src="../_images/math-and-experiments_21_0.png" />
+</div>
+</div>
+<p>Can you explain what you see?</p>
+<p>We leave the quadratic functons out (they are too <em>dominant</em>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The x values:</span>
+<span class="n">x</span>  <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># The y values</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">34</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">f3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">10</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">f4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">100</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="c1">#f5 = [3*i*i + 4*i + 10000 for i in x]</span>
+<span class="c1">#f6 = [5*i*i+ 4*i + 10 for i in x]</span>
+<span class="n">f7</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">f8</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+
+
+<span class="c1"># Prepare the tool:</span>
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot the points for all functions except f5 and f6</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f4</span><span class="p">)</span>
+<span class="c1">#ax.plot(x, f5)</span>
+<span class="c1">#ax.plot(x, f6)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f8</span><span class="p">)</span>
+
+
+<span class="c1"># Decorate the graph:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;f(x)&#39;</span><span class="p">,</span>
+       <span class="n">title</span><span class="o">=</span><span class="s1">&#39;functions&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a grid:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Display:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/math-and-experiments_23_0.png" src="../_images/math-and-experiments_23_0.png" />
+</div>
+</div>
+<p>Now the linear functions dominate! So let’s leave them out too:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The x values:</span>
+<span class="n">x</span>  <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># The y values</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">34</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="c1">#f3 = [4*i+10 for i in x]</span>
+<span class="c1">#f4 = [2*i+100 for i in x]</span>
+<span class="c1">#f5 = [3*i*i + 4*i + 10000 for i in x]</span>
+<span class="c1">#f6 = [5*i*i+ 4*i + 10 for i in x]</span>
+<span class="n">f7</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">f8</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+
+
+<span class="c1"># Prepare the tool:</span>
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot the points for f1, f2, f7 and f8:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f2</span><span class="p">)</span>
+<span class="c1">#ax.plot(x, f3)</span>
+<span class="c1">#ax.plot(x, f4)</span>
+<span class="c1">#ax.plot(x, f5)</span>
+<span class="c1">#ax.plot(x, f6)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f8</span><span class="p">)</span>
+
+
+<span class="c1"># Decorate the graph:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;f(x)&#39;</span><span class="p">,</span>
+       <span class="n">title</span><span class="o">=</span><span class="s1">&#39;functions&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a grid:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Display:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/math-and-experiments_25_0.png" src="../_images/math-and-experiments_25_0.png" />
+</div>
+</div>
+<p>Logarithms for large values of the argument are almost constant!</p>
+</div>
+<div class="section" id="ordering-functions-according-to-how-fast-they-grow">
+<h2>Ordering functions according to how fast they grow<a class="headerlink" href="#ordering-functions-according-to-how-fast-they-grow" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Constant</p></li>
+<li><p>Logarithmic</p></li>
+<li><p>Linear</p></li>
+<li><p>Linearithmic (can you guess what this is?)</p></li>
+<li><p>Quadratic</p></li>
+<li><p>Cubic</p></li>
+<li><p>Exponential (can you guess what this is?)</p></li>
+</ol>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="experiments-with-asymptotic-running-time">
+<h1>Experiments with asymptotic running time<a class="headerlink" href="#experiments-with-asymptotic-running-time" title="Permalink to this headline">¶</a></h1>
+<p>In the book you will find out how these functions are used to estimate how the execution time grows as a function of some size of the input.</p>
+<p>Here are some of the examples from the book as programs. In the book you are asked to guess the asymptotic running time of the code fragments. Here we do experiments to see what we can say from data we observe and relate to the discussions in the book.</p>
+<p>In all cases you are asked to guess whether the asymptotic behaviour is constant, logarithmic, linear or quadratic.</p>
+<div class="section" id="searching-one-array">
+<h2>Searching one array<a class="headerlink" href="#searching-one-array" title="Permalink to this headline">¶</a></h2>
+<p>The algorithm is presented in the book. We show how to organise an experiment and you will be asked to do the other cases on your own.</p>
+<p>The first program is as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">search1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">:</span> <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">search1</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here is how we can set up an experiment.</p>
+<p>First we need to identify what characteristic of the input can influence the running time: what is the size of the input?</p>
+<p>Given that the number of iterations is at most the length of the input array we settle for this. The maximum number of iterations is reached whenever the input is such that the sought element does not occur in the array.</p>
+<p>We then meassure execution time for arrays of increasing sizes not containing the sought element. We can do this by generating ranges of positive numbers and looking for -1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">running_time_data</span><span class="p">(</span><span class="n">start_size</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">start_size</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">times</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">times</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span> 
+        <span class="n">search1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time_ns</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">*=</span> <span class="n">step</span>
+    <span class="k">return</span> <span class="n">results</span>
+        
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># You could use this data in a table or, as below, in a plot</span>
+<span class="n">running_time_data</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([1000,
+  2000,
+  4000,
+  8000,
+  16000,
+  32000,
+  64000,
+  128000,
+  256000,
+  512000,
+  1024000,
+  2048000,
+  4096000,
+  8192000,
+  16384000],
+ [164000,
+  317000,
+  635000,
+  1279000,
+  2553000,
+  5102000,
+  9424000,
+  19797000,
+  40354000,
+  80949000,
+  134969000,
+  108141000,
+  215060000,
+  435997000,
+  886479000])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="n">running_time_data</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Prepare the tool:</span>
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot the points fo fx and gx:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Decorate the graph:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span>
+       <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Running time as function of array length&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a grid:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Display:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/math-and-experiments_35_0.png" src="../_images/math-and-experiments_35_0.png" />
+</div>
+</div>
+<div class="section" id="quiz">
+<h3>Quiz<a class="headerlink" href="#quiz" title="Permalink to this headline">¶</a></h3>
+<p>Adapted to Python from Quiz 2.1 in Algorithms illuminated, part 1, page 39.
+The solution to the quiz is discussed in section 2.1.4 of the book. The explanation is not based on an experiment but on counting operations and using asymptotic analysis. Does the experiment confirm the answer?</p>
+<p>What is the asymptotic running time for <code class="docutils literal notranslate"><span class="pre">search1</span></code>?</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(\)</span>log<span class="math notranslate nohighlight">\( \,n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(n^2)\)</span></p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="searching-two-arrays">
+<h2>Searching two arrays<a class="headerlink" href="#searching-two-arrays" title="Permalink to this headline">¶</a></h2>
+<p>In the cell below you have the program for searching.</p>
+<p>You should try an experiment at in the previous case. We recommend you to use a smaller number of times you duplicate the size of the arrays.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">search2</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">:</span> <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">:</span> <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">search2</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Quiz<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Adapted to Python from Quiz 2.2 in Algorithms illuminated, part 1, page 40.
+The solution to the quiz is discussed in section 2.1.4 of the book. The explanation is not based on an experiment but on counting operations and using asymptotic analysis. Does the experiment confirm the answer?</p>
+<p>What is the asymptotic running time for <code class="docutils literal notranslate"><span class="pre">search2</span></code>?</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(\)</span>log<span class="math notranslate nohighlight">\( \,n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(n^2)\)</span></p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="checking-for-a-common-element">
+<h2>Checking for a common element<a class="headerlink" href="#checking-for-a-common-element" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">common</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">common</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Quiz<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Adapted to Python from Quiz 2.3 in Algorithms illuminated, part 1, page 41.
+The solution to the quiz is discussed in section 2.1.4 of the book. The explanation is not based on an experiment but on counting operations and using asymptotic analysis. Does the experiment confirm the answer?</p>
+<p>What is the asymptotic running time for <code class="docutils literal notranslate"><span class="pre">common</span></code>?</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(\)</span>log<span class="math notranslate nohighlight">\( \,n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(n^2)\)</span></p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="checking-for-duplicates">
+<h2>Checking for duplicates<a class="headerlink" href="#checking-for-duplicates" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">duplicates</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duplicates</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Quiz<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Adapted to Python from Quiz 2.4 in Algorithms illuminated, part 1, page 42.
+The solution to the quiz is discussed in section 2.1.4 of the book. The explanation is not based on an experiment but on counting operations and using asymptotic analysis. Does the experiment confirm the answer?</p>
+<p>What is the asymptotic running time for <code class="docutils literal notranslate"><span class="pre">duplicates</span></code>?</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(\)</span>log<span class="math notranslate nohighlight">\( \,n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(O(n^2)\)</span></p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="sorting">
+<h2>Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h2>
+<p>We leave as an exercise that you generate running time data and plot the timing results for the sorting algorithms we programmed in the section Order and sorting: selection sort, insertion sort and bubble sort.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./algs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="et.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Order and sorting</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../design/intro.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Veronica Gaspes<br/>
+    
+        &copy; Copyright none.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
