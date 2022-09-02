@@ -46,11 +46,11 @@
 # 
 # Here is the sketch of the paradigm once more:
 # 
-# 1) Identify a relatively small number of subproblems.
+# 1. Identify a relatively small number of subproblems.
 # 
-# 2) Show how to quickly and correctly solve *larger* problems given solutions to *smaller* problems.
+# 2. Show how to quickly and correctly solve *larger* problems given solutions to *smaller* problems.
 # 
-# 3) Show how to quickly and correctly infer the final solution from the solutions to all the subproblems. 
+# 3. Show how to quickly and correctly infer the final solution from the solutions to all the subproblems. 
 # 
 # > The algorithm you obtain is to systematically solve all the subproblems one by one, working from smallest to largest and extract the final solution from the solutions to the subproblems. 
 # 
@@ -80,39 +80,39 @@
 # 
 # Let's look at the example, starting with the smallest path graph and building the solutions for the longer and longer path graphs using these ideas:
 # 
-# 1) The solution for the path graph with only node 0 is the independent set ${0}$ with weight 6.
+# 1. The solution for the path graph with only node 0 is the independent set ${0}$ with weight 6.
 # 
-# 2) The solution for the path graph with nodes 0 and 1 can only have one node (it has to be an independent set!). So, it will pick node 0 or node 1, the one with highest weight. In our case the solution is ${1}$ with weight 10.
+# 2. The solution for the path graph with nodes 0 and 1 can only have one node (it has to be an independent set!). So, it will pick node 0 or node 1, the one with highest weight. In our case the solution is ${1}$ with weight 10.
 # 
-# 3) The solution for the path graph with nodes 0, 1 and 2 is found by picking the best between:
+# 3. The solution for the path graph with nodes 0, 1 and 2 is found by picking the best between:
 # 
-#         a) The solution for the path graph 0, 1: weight 10
+#    a. The solution for the path graph 0, 1: weight 10
 #    
-#         b) The solution for the path graph 0 and the node 2: weight 6 + 1
+#    b. The solution for the path graph 0 and the node 2: weight 6 + 1
 #         
 #    We keep the same solution as for 0, 1 with weight 10.
 #    
-# 4) The solution for the path with nodes 0, 1, 2, 3 is found by picking the best between:
+# 4. The solution for the path with nodes 0, 1, 2, 3 is found by picking the best between:
 # 
-#         a)  The solution for path graph 0, 1, 2: weight 10
+#    a.  The solution for path graph 0, 1, 2: weight 10
 #     
-#         b)  The solution for path graph 0, 1 and node 3: weight 10 + 1
+#    b.  The solution for path graph 0, 1 and node 3: weight 10 + 1
 #     
 #    We take the solution for path graph 0, 1 and add node 3: weight 10 + 1
 #    
-# 5) The solution for the path with nodes 0, 1, 2, 3, 4 is found by picking the best between:
+# 5. The solution for the path with nodes 0, 1, 2, 3, 4 is found by picking the best between:
 # 
-#         a)  The solution for path graph 0, 1, 2, 3: weight 11
+#    a.  The solution for path graph 0, 1, 2, 3: weight 11
 #         
-#         b)  The solution for path graph 0, 1, 2 and node 4: weight 10 + 1
+#    b.  The solution for path graph 0, 1, 2 and node 4: weight 10 + 1
 #     
 #    They are the same! We could pick any of them. Both have weight 11.
 #    
-# 6) The solution for the path with nodes 0, 1, 2, 3, 4, 5 is found by picking the best between:
+# 6. The solution for the path with nodes 0, 1, 2, 3, 4, 5 is found by picking the best between:
 # 
-#         a)  The solution for path graph 0, 1, 2, 3, 4: weight 11
+#    a.  The solution for path graph 0, 1, 2, 3, 4: weight 11
 #         
-#         b)  The solution for path graph 0, 1, 2, 3 and node 5: weight 11 + 2
+#    b.   The solution for path graph 0, 1, 2, 3 and node 5: weight 11 + 2
 #     
 #    We take the solution for path graph 0, 1, 2, 3 and add node 5: weight 11 + 2.
 #    
