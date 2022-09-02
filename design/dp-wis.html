@@ -543,35 +543,23 @@ Given an independent set in a weighted path graph, we can calculate the total we
 <li><p>The solution for the path graph with only node 0 is the independent set <span class="math notranslate nohighlight">\({0}\)</span> with weight 6.</p></li>
 <li><p>The solution for the path graph with nodes 0 and 1 can only have one node (it has to be an independent set!). So, it will pick node 0 or node 1, the one with highest weight. In our case the solution is <span class="math notranslate nohighlight">\({1}\)</span> with weight 10.</p></li>
 <li><p>The solution for the path graph with nodes 0, 1 and 2 is found by picking the best between:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> a) The solution for the path graph 0, 1: weight 10
-
- b) The solution for the path graph 0 and the node 2: weight 6 + 1
-</pre></div>
-</div>
+<p>a. The solution for the path graph 0, 1: weight 10</p>
+<p>b. The solution for the path graph 0 and the node 2: weight 6 + 1</p>
 <p>We keep the same solution as for 0, 1 with weight 10.</p>
 </li>
 <li><p>The solution for the path with nodes 0, 1, 2, 3 is found by picking the best between:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> a)  The solution for path graph 0, 1, 2: weight 10
-
- b)  The solution for path graph 0, 1 and node 3: weight 10 + 1
-</pre></div>
-</div>
+<p>a.  The solution for path graph 0, 1, 2: weight 10</p>
+<p>b.  The solution for path graph 0, 1 and node 3: weight 10 + 1</p>
 <p>We take the solution for path graph 0, 1 and add node 3: weight 10 + 1</p>
 </li>
 <li><p>The solution for the path with nodes 0, 1, 2, 3, 4 is found by picking the best between:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> a)  The solution for path graph 0, 1, 2, 3: weight 11
- 
- b)  The solution for path graph 0, 1, 2 and node 4: weight 10 + 1
-</pre></div>
-</div>
+<p>a.  The solution for path graph 0, 1, 2, 3: weight 11</p>
+<p>b.  The solution for path graph 0, 1, 2 and node 4: weight 10 + 1</p>
 <p>They are the same! We could pick any of them. Both have weight 11.</p>
 </li>
 <li><p>The solution for the path with nodes 0, 1, 2, 3, 4, 5 is found by picking the best between:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> a)  The solution for path graph 0, 1, 2, 3, 4: weight 11
- 
- b)  The solution for path graph 0, 1, 2, 3 and node 5: weight 11 + 2
-</pre></div>
-</div>
+<p>a.  The solution for path graph 0, 1, 2, 3, 4: weight 11</p>
+<p>b.   The solution for path graph 0, 1, 2, 3 and node 5: weight 11 + 2</p>
 <p>We take the solution for path graph 0, 1, 2, 3 and add node 5: weight 11 + 2.</p>
 </li>
 </ol>

@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -393,6 +395,83 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definitions-and-examples">
+   Definitions and examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#capacity">
+     Capacity:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#items">
+     Items:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#values">
+     Values:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sizes">
+     Sizes:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problem-statement">
+   Problem statement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-the-algorithm">
+   Finding the algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quiz">
+     Quiz
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Quiz
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise">
+   Exercise
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Quiz
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   Quiz
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   Exercise
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -405,6 +484,83 @@
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definitions-and-examples">
+   Definitions and examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#capacity">
+     Capacity:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#items">
+     Items:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#values">
+     Values:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sizes">
+     Sizes:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problem-statement">
+   Problem statement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-the-algorithm">
+   Finding the algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quiz">
+     Quiz
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Quiz
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise">
+   Exercise
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Quiz
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   Quiz
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   Exercise
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -413,6 +569,166 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="the-knapsack-problem">
 <h1>The knapsack problem<a class="headerlink" href="#the-knapsack-problem" title="Permalink to this headline">¶</a></h1>
+<p>Imagine wanting to take with you very valuable things as you move to another country. Maybe taking all of them is not possible: they weigh too much for what your flight allows for. How do you choose what to take with you and what to leave behind?</p>
+<p>How much weight you are allowed for your luggage is given, the airline has decided.</p>
+<p>The weights of the items are as they are.</p>
+<p>Imagine assigning a value to each of the items reflecting how important each item is for you.</p>
+<p>We hope to calculate what items to put in the luggage so that you get as much value as possible while keeping the total weight below the limit imposed by the airline.</p>
+<p>In computer science this is one of many possible formulations of the Knapsack problem (the knapsack being your luggage). You will find other formulations in the Wikipedia entry <a class="reference external" href="https://en.wikipedia.org/wiki/Knapsack_problem#Applications">Knapsack problem</a>. The book <a class="reference external" href="http://www.algorithmsilluminated.org">Algorithms Illuminated</a> puts it as</p>
+<blockquote>
+<div><p>Whenever you have a scarce resource that you want to use in the smartest way possible, you are talking about the knapsack problem. On which goods and services should you spend your paycheck to get the most value? Given an operating budget and a set of job candidates with different productivities and requested salaries, whom should you hire? These are examples of knapsack problems.</p>
+</div></blockquote>
+<div class="section" id="definitions-and-examples">
+<h2>Definitions and examples<a class="headerlink" href="#definitions-and-examples" title="Permalink to this headline">¶</a></h2>
+<p>In an instance of the Knapsack problem we get some items for which we know their value and their size, and we also get a so called capacity.</p>
+<p>The result will be a list of items for which the total value is as big as possible and the total size is at most the capacity.</p>
+<p>We do not need to say what the values or the sizes or the capacity stand for, it might be different things for different applications.</p>
+<p>Here is an example:</p>
+<div class="section" id="capacity">
+<h3>Capacity:<a class="headerlink" href="#capacity" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">10</span></code></p>
+</div>
+<div class="section" id="items">
+<h3>Items:<a class="headerlink" href="#items" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">0,1,2,3,4</span></code></p>
+</div>
+<div class="section" id="values">
+<h3>Values:<a class="headerlink" href="#values" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">5,4,3,2,1</span></code></p>
+</div>
+<div class="section" id="sizes">
+<h3>Sizes:<a class="headerlink" href="#sizes" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">2,4,1,5,3</span></code></p>
+<p>Or with a table</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>Item</p></th>
+<th class="text-align:center head"><p>Value</p></th>
+<th class="text-align:center head"><p>Size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>5</p></td>
+<td class="text-align:center"><p>2</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>4</p></td>
+<td class="text-align:center"><p>4</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>2</p></td>
+<td class="text-align:center"><p>3</p></td>
+<td class="text-align:center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>3</p></td>
+<td class="text-align:center"><p>2</p></td>
+<td class="text-align:center"><p>5</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>4</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>3</p></td>
+</tr>
+</tbody>
+</table>
+<p>A list with all the items is not a result: the total size is <code class="docutils literal notranslate"><span class="pre">15</span></code> while the capacity is only <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p>
+<p>Can we achieve a total size of exactly <code class="docutils literal notranslate"><span class="pre">10</span></code> with some of the items? Well yes! Take all of the items except the one with size <code class="docutils literal notranslate"><span class="pre">5</span></code> (item <code class="docutils literal notranslate"><span class="pre">3</span></code>): <code class="docutils literal notranslate"><span class="pre">[0,1,2,4]</span></code>. But also these lists have weight <code class="docutils literal notranslate"><span class="pre">10</span></code>: <code class="docutils literal notranslate"><span class="pre">[0,3,4]</span></code> and <code class="docutils literal notranslate"><span class="pre">[1,2,3]</span></code>.</p>
+<p>What are the values of these lists of items?</p>
+<p><code class="docutils literal notranslate"><span class="pre">[0,1,2,4]</span></code> has value <code class="docutils literal notranslate"><span class="pre">5+4+3+1</span> <span class="pre">=</span> <span class="pre">13</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">[0,3,4]</span></code> has value <code class="docutils literal notranslate"><span class="pre">5+2+1</span> <span class="pre">=</span> <span class="pre">8</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">[1,2,3]</span></code> has value <code class="docutils literal notranslate"><span class="pre">4+3+2</span> <span class="pre">=</span> <span class="pre">9</span></code></p>
+<p>So, among these we would pick the list of objects <code class="docutils literal notranslate"><span class="pre">[0,1,2,4]</span></code> that has the highest value!</p>
+<p>But now the question is, could we have a higher value even if the size is not exactly <code class="docutils literal notranslate"><span class="pre">10</span></code>?</p>
+<p>The highest value we can achieve (all items) is <code class="docutils literal notranslate"><span class="pre">15</span></code>. We already know that we cannot hope for that because it uses all items and the total size is more than <code class="docutils literal notranslate"><span class="pre">10</span></code>! What about <code class="docutils literal notranslate"><span class="pre">14</span></code>? The only way that can be is by not using element <code class="docutils literal notranslate"><span class="pre">4</span></code> (value <code class="docutils literal notranslate"><span class="pre">1</span></code>): <code class="docutils literal notranslate"><span class="pre">[0,1,2,3]</span></code>. But then the size is <code class="docutils literal notranslate"><span class="pre">2+4+1+5</span> <span class="pre">=</span> <span class="pre">12</span></code> which is more than <code class="docutils literal notranslate"><span class="pre">10</span></code>!</p>
+<p>So it seems we have a result: the list <code class="docutils literal notranslate"><span class="pre">[0,1,2,4]</span></code> with value <code class="docutils literal notranslate"><span class="pre">13</span></code> and size <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p>
+<p>Now we will go for designing an algorithm that can solve any instance of the problem. We will follow the ideas of Dynamic Programming to design the algorithm. This is explained in detail in chapter 16.5 in part 3 of the book <a class="reference external" href="http://www.algorithmsilluminated.org">Algorithms Illuminated</a>.</p>
+</div>
+</div>
+<div class="section" id="problem-statement">
+<h2>Problem statement<a class="headerlink" href="#problem-statement" title="Permalink to this headline">¶</a></h2>
+<p>The input to the problem are 1) the list of values, 2) the list of sizes and 3) the capacity. The output is a subset of the items such that its total size is at most the capacity and its total value is as large as possible.</p>
+</div>
+<div class="section" id="finding-the-algorithm">
+<h2>Finding the algorithm<a class="headerlink" href="#finding-the-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>The book  <a class="reference external" href="http://algorithmsilluminated.org">Algorithms Illuminated</a> discusses this problem in detail in Chapter 16.5 in Part 3.</p>
+<p>Recall the three steps:</p>
+<ol class="simple">
+<li><p>Identify a relatively small number of subproblems.</p></li>
+<li><p>Show how to quickly and correctly solve <em>larger</em> problems given solutions to <em>smaller</em> problems.</p></li>
+<li><p>Show how to quickly and correctly infer the final solution from the solutions to all the subproblems.</p></li>
+</ol>
+<blockquote>
+<div><p>The algorithm you obtain is to systematically solve all the subproblems one by one, working from smallest to largest and extract the final solution from the solutions to the subproblems.</p>
+</div></blockquote>
+<p>For step 1 we do as usual, we carefully inspect a solution to a problem to see whather we can use some information about how that solution should <em>look like</em>. <strong>Again, in contrast to Divide and Conquer, we do not start by looking at the size of the input to find subproblems, instead we look at a solution to see how it is composed of solutions to smaller problems.</strong></p>
+<p>Say that you have a solution for an instance of the knapsack problem given by values <span class="math notranslate nohighlight">\(v_0, \ldots, v_{n-1}\)</span>, sizes <span class="math notranslate nohighlight">\(s_0, \ldots, s_{n-1}\)</span> and capacity <span class="math notranslate nohighlight">\(C\)</span>. A soultion will be a subset of the items <span class="math notranslate nohighlight">\(S \subseteq \{0,\ldots, n-1\}\)</span> with maximal value and total size at most <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p>Again, we inspect it by looking at the items that might be included in <span class="math notranslate nohighlight">\(S\)</span> and we consider whether <span class="math notranslate nohighlight">\(S\)</span> uses one of the items or not. In order to make our task easy, we consider the last item, the one called <span class="math notranslate nohighlight">\(n-1\)</span>. There are only two cases to consider: either <span class="math notranslate nohighlight">\(n-1 \in S\)</span> or <span class="math notranslate nohighlight">\(n-1 \notin S\)</span>!</p>
+<div class="section" id="quiz">
+<h3>Quiz<a class="headerlink" href="#quiz" title="Permalink to this headline">¶</a></h3>
+<p>Go back to the example and check what is the case for the solution we suggested. Check, what is <span class="math notranslate nohighlight">\(n\)</span>? Does the solution use item <span class="math notranslate nohighlight">\(n-1\)</span>?</p>
+<p>Let’s consider the two cases to see what we can observe.</p>
+<ul class="simple">
+<li><p>If the last item is not part of <span class="math notranslate nohighlight">\(S\)</span> we could also consider it as a solution to the knapsack problem instance with the same capacity but with one less element: the size is at most the capacity and there could not be an item that improved the total value (we would have used it in <span class="math notranslate nohighlight">\(S\)</span> already!). So we can say that if the last element is not used in <span class="math notranslate nohighlight">\(S\)</span> then <span class="math notranslate nohighlight">\(S\)</span> is in itself a solution to a smaller instance of the knapsack problem with values <span class="math notranslate nohighlight">\(v_0, \ldots, v_{n-2}\)</span>,  sizes <span class="math notranslate nohighlight">\(s_0, \ldots, s_{n-2}\)</span> and capacity <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>If the last item is part of <span class="math notranslate nohighlight">\(S\)</span> it is there contributing its value and its size! How can this come from a solution to another instance of the knapsack problem? It cannot be a solution to an instance with less items but has the same cpacity, because a solution to that problem might not leave place for the size of the last item! But this suggests another instance: less items and a capacity that leaves place for the size of the last item: <span class="math notranslate nohighlight">\(C - s_{n-1}\)</span>!</p></li>
+</ul>
+<p>And this gives us a <em>nice(?)</em> recursion for the maximum total value of a subset of the items with total size smaller than the capacity</p>
+<div class="math notranslate nohighlight">
+\[ V_{i,C} = \text{max}\{V_{i-1,C}, V_{i-1, C-s_i} + v_i\} \]</div>
+<p>This is not that nice! There are many re-calculations. But we can try to find a way to build up the results starting from solutions to small problems and building solutions to larger problems. It is more difficult than before because we not only go back removing items, we also reduce the capacity in one of the cases!</p>
+<p>What we need to build is solutions for items and capacities: we need a 2-d array! The solution will be found when we look at the array in the position that stands for the instance with all items and the original capacity!</p>
+<p>Finally, here is the program in Python for the algorithm presented in the book.</p>
+<p>The array <code class="docutils literal notranslate"><span class="pre">A</span></code> has two dimensions. One of the dimensions is what items are used (0 items, 1 item, two items, etc) and the other dimension is for all capacities between 0 and the capacity that is an input to the problem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The Dynamic Programming solution to the knapsack problem</span>
+<span class="c1"># For </span>
+<span class="c1"># items             0,  1,  2,  etc </span>
+<span class="c1"># that have values  v0, v1, v2, etc </span>
+<span class="c1"># and sizes         s0, s1, s2, etc</span>
+<span class="c1"># find the items with maximum total value </span>
+<span class="c1"># such that the total size is not larger than a given capacity C</span>
+<span class="c1"># sizes and the capacity are non negative integer values.</span>
+
+<span class="k">def</span> <span class="nf">dp_knapsack</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">sizes</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">C</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        
+    <span class="c1"># A[0][c] has already 0s (using 0 items, for all capacities, the value is 0!)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">C</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">sizes</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">c</span><span class="p">:</span> <span class="c1"># sizes are numbered from 0!</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="c1"># there is no other choice!</span>
+            <span class="k">else</span><span class="p">:</span> 
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">c</span><span class="p">],</span> 
+                              <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">c</span> <span class="o">-</span> <span class="n">sizes</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">vals</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">C</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Quiz<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>What are the dimensions of the array <code class="docutils literal notranslate"><span class="pre">A</span></code> for the example we used (5 items, capacity 10).</p>
+</div>
+<div class="section" id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<p>Build the array for the example and identify the solution in the array.</p>
+</div>
+<div class="section" id="id2">
+<h2>Quiz<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>The array contains only values. Can you say what items are in the solution?</p>
+</div>
+<div class="section" id="id3">
+<h2>Quiz<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>What is the asymtotic execution time of the algorithm?</p>
+</div>
+<div class="section" id="id4">
+<h2>Exercise<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>Write a program for the recursive version and do experiments to compare how the  execution time of both programs grows with the size of the problem.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
