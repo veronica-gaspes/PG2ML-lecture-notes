@@ -149,6 +149,9 @@ def dp_knapsack(vals, sizes, C):
 # ## Exercise
 # Build the array for the example and identify the solution in the array.
 # 
+# ## Exercise
+# Use the program for the example. How can you try it using the items in different orders?
+# 
 # ## Quiz
 # The array contains only values. Can you say what items are in the solution?
 # 
