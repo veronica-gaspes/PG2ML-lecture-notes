@@ -56,7 +56,7 @@
 # 
 # ### How can we identify *the small number of subproblems?*
 # 
-# We can start by assuming that we have a solution for a given size and try to see what components, in terms of solutions to smaller problems it can have. **Notice that we do not look at the input size but at how the solution might look like!*
+# We can start by assuming that we have a solution for a given size and try to see what components, in terms of solutions to smaller problems it can have. **Notice that we do not look at the input size but at how the solution might look like!**
 # 
 # Consider the example, and say that we have a solution for the whole path graph: we have an independent set $S$ of maximum weight for the whole path graph. 
 # 
@@ -128,25 +128,22 @@
 def dp_wis(wpg):
     
     n = len(wpg)
-    solution_weights = [0] * n
+    solution_weights = [0] * (n + 1)
     
-    # For a path graph with only one node the solution uses that node!
-    solution_weights[0] = wpg[0]
+    # For an empty path graph 
+    solution_weights[0] = 0
     
-    # For a path graph with two nodes, only one can be in the independent set: the one with highest weight
-    if wpg[0] > wpg[1]:
-        solution_weights[1] = wpg[0]
-    else:
-        solution_weights[1] = wpg[1]
+    # For a path graph with one nodes
+    solution_weights[1] = wpg[0]
       
     # In all other cases pick the best between the solution for the path graph with one less node
     # or the solution fot the path graph with 2 less nodes and add the last node.
-    for i in range(2, n):
+    for i in range(2, n + 1):
         solution_weights[i] = max(solution_weights[i - 1], 
-                                  solution_weights[i - 2] + wpg[i])
+                                  solution_weights[i - 2] + wpg[i-1])
     
     # Finally, the solution is the last element!
-    return solution_weights[n-1]
+    return solution_weights[n]
         
 
 
@@ -181,39 +178,37 @@ dp_wis([1,4,5,4])
 def dp_wis_with_reconstruction(wpg):
     
     n = len(wpg)
-    solution_weights = [0] * n
+    solution_weights = [0] * (n + 1)
     
-    # For a path graph with only one node the solution uses that node!
-    solution_weights[0] = wpg[0]
+    # For an empty path graph 
+    solution_weights[0] = 0
     
-    # For a path graph with two nodes, only one can be in the independent set: the one with highest weight
-    if wpg[0] > wpg[1]:
-        solution_weights[1] = wpg[0]
-    else:
-        solution_weights[1] = wpg[1]
+    # For a path graph with one nodes
+    solution_weights[1] = wpg[0]
       
     # In all other cases pick the best between the solution for the path graph with one less node
     # or the solution fot the path graph with 2 less nodes and add the last node.
-    for i in range(2, n):
+    for i in range(2, n + 1):
         solution_weights[i] = max(solution_weights[i - 1], 
-                                  solution_weights[i - 2] + wpg[i])
+                                  solution_weights[i - 2] + wpg[i-1])
+    
 
     # Finally, the solution is the last element!
     
     # Reconstruction ()
     wis = set()
-    i = n - 1
-    while i >= 1:
-        if solution_weights[i-1] > solution_weights[i-2] + wpg[i]:
+    i = n
+    while i >= 2:
+        if solution_weights[i-1] >= solution_weights[i-2] + wpg[i-1]:
             i = i - 1
         else:
-            wis.add(i)
+            wis.add(i-1)
             i = i - 2
             
-    if i == 0: wis.add(0)
+    if i == 1: wis.add(1)
         
     # the set and the weight
-    return (wis, solution_weights[n-1])
+    return (wis, solution_weights[n])
 
 
 # In[5]:
@@ -227,4 +222,10 @@ dp_wis_with_reconstruction([6,10,1,1,1,2])
 
 # the example in the book:
 dp_wis_with_reconstruction([1,4,5,4])
+
+
+# In[ ]:
+
+
+
 

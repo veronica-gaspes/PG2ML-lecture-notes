@@ -162,7 +162,7 @@ def running_time_experiment_sum_squares_v2(initial_bound, step, times):
             sq = 0
             for j in range(i):
                 sq += i
-            value2 += sq
+            value3 += sq
         running_time3 = time.process_time() - start3
         
         print(bound, 

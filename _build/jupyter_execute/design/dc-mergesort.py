@@ -273,8 +273,15 @@ plt.show()
 # 
 # ### Notice
 # 
-# An asymptotic behaviour of $n \, $log$ \, n$ is what in the book is called a *for free primitive*: you can use it in your algorithms, it will not spoil them. 
+# An asymptotic behaviour of $n \cdot $log$\,n$ is what in the book is called a *for free primitive*: you can use it in your algorithms, it will not spoil them. 
 # 
-# One way of seeing this is that just filling in the array is already linear! And $n \, $log$ \, n$ is *almost linear*: asymptotically $$log$ \, n$ is almost a constant!
+# One way of seeing this is that just filling in the array is already linear! And 
+# $n \cdot $log$\,n$ is *almost linear*: asymptotically $ $log$\,n$ is almost a constant!
 #  
 # And now think: mergesort can sort an array as fast as filling in the array!
+
+# In[ ]:
+
+
+
+
