@@ -523,7 +523,7 @@ Given an independent set in a weighted path graph, we can calculate the total we
 </div></blockquote>
 <div class="section" id="how-can-we-identify-the-small-number-of-subproblems">
 <h3>How can we identify <em>the small number of subproblems?</em><a class="headerlink" href="#how-can-we-identify-the-small-number-of-subproblems" title="Permalink to this headline">¶</a></h3>
-<p>We can start by assuming that we have a solution for a given size and try to see what components, in terms of solutions to smaller problems it can have. *<em>Notice that we do not look at the input size but at how the solution might look like!</em></p>
+<p>We can start by assuming that we have a solution for a given size and try to see what components, in terms of solutions to smaller problems it can have. <strong>Notice that we do not look at the input size but at how the solution might look like!</strong></p>
 <p>Consider the example, and say that we have a solution for the whole path graph: we have an independent set <span class="math notranslate nohighlight">\(S\)</span> of maximum weight for the whole path graph.</p>
 <p>We do not know much about this set <span class="math notranslate nohighlight">\(S\)</span>!</p>
 <p>But, given that we cannot have the two last nodes in the set and that the weights are positive, the set will either include the last node (node 5) or it will not. If not, it will include the next to last (node 4)! If it does,  it will not include the next to last! So, lets consider these two cases:</p>
@@ -572,25 +572,22 @@ Given an independent set in a weighted path graph, we can calculate the total we
 <span class="k">def</span> <span class="nf">dp_wis</span><span class="p">(</span><span class="n">wpg</span><span class="p">):</span>
     
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wpg</span><span class="p">)</span>
-    <span class="n">solution_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="n">solution_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     
-    <span class="c1"># For a path graph with only one node the solution uses that node!</span>
-    <span class="n">solution_weights</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">wpg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># For an empty path graph </span>
+    <span class="n">solution_weights</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     
-    <span class="c1"># For a path graph with two nodes, only one can be in the independent set: the one with highest weight</span>
-    <span class="k">if</span> <span class="n">wpg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">wpg</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="n">solution_weights</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">wpg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">solution_weights</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">wpg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># For a path graph with one nodes</span>
+    <span class="n">solution_weights</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">wpg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
       
     <span class="c1"># In all other cases pick the best between the solution for the path graph with one less node</span>
     <span class="c1"># or the solution fot the path graph with 2 less nodes and add the last node.</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> 
-                                  <span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">wpg</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                                  <span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">wpg</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     
     <span class="c1"># Finally, the solution is the last element!</span>
-    <span class="k">return</span> <span class="n">solution_weights</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">solution_weights</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
         
 </pre></div>
 </div>
@@ -635,39 +632,37 @@ Given an independent set in a weighted path graph, we can calculate the total we
 <span class="k">def</span> <span class="nf">dp_wis_with_reconstruction</span><span class="p">(</span><span class="n">wpg</span><span class="p">):</span>
     
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wpg</span><span class="p">)</span>
-    <span class="n">solution_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="n">solution_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     
-    <span class="c1"># For a path graph with only one node the solution uses that node!</span>
-    <span class="n">solution_weights</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">wpg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># For an empty path graph </span>
+    <span class="n">solution_weights</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     
-    <span class="c1"># For a path graph with two nodes, only one can be in the independent set: the one with highest weight</span>
-    <span class="k">if</span> <span class="n">wpg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">wpg</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="n">solution_weights</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">wpg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">solution_weights</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">wpg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># For a path graph with one nodes</span>
+    <span class="n">solution_weights</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">wpg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
       
     <span class="c1"># In all other cases pick the best between the solution for the path graph with one less node</span>
     <span class="c1"># or the solution fot the path graph with 2 less nodes and add the last node.</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> 
-                                  <span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">wpg</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                                  <span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">wpg</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    
 
     <span class="c1"># Finally, the solution is the last element!</span>
     
     <span class="c1"># Reconstruction ()</span>
     <span class="n">wis</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">wpg</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">n</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">wpg</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
             <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">wis</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">wis</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">2</span>
             
-    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">wis</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="n">wis</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         
     <span class="c1"># the set and the weight</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">wis</span><span class="p">,</span> <span class="n">solution_weights</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">wis</span><span class="p">,</span> <span class="n">solution_weights</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
