@@ -25,15 +25,19 @@
 # 
 # We do not need to say what the values or the sizes or the capacity stand for, it might be different things for different applications.
 # 
-# Here is an example:  
+# Here is an example: 
+# 
 # ### Capacity:
-# ```10```
+# ``` 10 ```
+# 
 # ### Items:
-# ```0,1,2,3,4```
+# ``` 0,1,2,3,4 ```
+# 
 # ### Values:
-# ```5,4,3,2,1```
+# ``` 5,4,3,2,1 ```
+# 
 # ### Sizes:
-# ```2,4,1,5,3```
+# ``` 2,4,1,5,3 ```
 # 
 # 
 # Or with a table
@@ -46,7 +50,7 @@
 # |3|2|5|
 # |4|1|3|
 # 
-# A list with all the items is not a result: the total size is ```15``` while the capacity is only ```10```.
+# A list with all the items is not a solution: the total size is ```15``` while the capacity is only ```10```.
 # 
 # Can we achieve a total size of exactly ```10``` with some of the items? Well yes! Take all of the items except the one with size ```5``` (item ```3```): ```[0,1,2,4]```. But also these lists have weight ```10```: ```[0,3,4]``` and ```[1,2,3]```. 
 # 
@@ -99,7 +103,7 @@
 # 
 # * If the last item is not part of $S$ we could also consider it as a solution to the knapsack problem instance with the same capacity but with one less element: the size is at most the capacity and there could not be an item that improved the total value (we would have used it in $S$ already!). So we can say that if the last element is not used in $S$ then $S$ is in itself a solution to a smaller instance of the knapsack problem with values $v_0, \ldots, v_{n-2}$,  sizes $s_0, \ldots, s_{n-2}$ and capacity $C$.
 # 
-# * If the last item is part of $S$ it is there contributing its value and its size! How can this come from a solution to another instance of the knapsack problem? It cannot be a solution to an instance with less items but has the same cpacity, because a solution to that problem might not leave place for the size of the last item! But this suggests another instance: less items and a capacity that leaves place for the size of the last item: $C - s_{n-1}$!
+# * If the last item is part of $S$ it is there contributing its value and its size! How can this come from a solution to another instance of the knapsack problem? It cannot be from a solution to an instance with less items and the same capacity, because a solution to that problem might not leave place for the size of the last item! But this suggests another instance: less items and a capacity that leaves place for the size of the last item: $C - s_{n-1}$!
 # 
 # And this gives us a *nice(?)* recursion for the maximum total value of a subset of the items with total size smaller than the capacity
 # 
