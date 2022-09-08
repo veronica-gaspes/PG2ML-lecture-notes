@@ -7,7 +7,7 @@ parts:
   - caption: Overview of the course
     chapters:
     - file: overview/overview.md
-    
+
   - caption: Algorithms and their execution time behaviour
     chapters:
     - file: algs/intro
@@ -20,7 +20,7 @@ parts:
       - file: algs/theory-exercises-1
       - file: algs/programming-exercises-1
       - file: algs/programming-solutions-1
-      
+
     - file: algs/execution-time.md
       sections:
       - file: algs/et.ipynb
@@ -29,7 +29,7 @@ parts:
   - caption: Algorithm design paradigms
     chapters:
     - file: design/intro
-    
+
     - file: design/dc-intro
       sections:
       - file: design/dc-mergesort
@@ -44,6 +44,7 @@ parts:
   - caption: Data structures
     chapters:
     - file: ds/intro
+    
     - file: ds/lecture5
       sections:
       - file: ds/lists
@@ -54,7 +55,7 @@ parts:
     - file: ds/heap-intro
       sections:
       - file: ds/heap
-      - file: ds/heap-apps      
+      - file: ds/heap-apps
 
     - file: ds/bst-intro
       sections:
@@ -70,4 +71,3 @@ parts:
       sections:
       - file: ds/graphs
       - file: ds/graphs-apps
-    

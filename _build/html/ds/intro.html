@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Data structures &#8212; Python - a gateway to machine learning</title>
+    <title>Introduction &#8212; Python - a gateway to machine learning</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -264,7 +264,7 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Data structures
+   Introduction
   </a>
  </li>
  <li class="toctree-l1 has-children">
@@ -383,7 +383,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Data structures</h1>
+                <h1>Introduction</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -394,18 +394,25 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="data-structures">
-<h1>Data structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>Up to this point we have been dealing with algorithms that work on numbers or arrays. At one point we needed sets and we just used Python’s implementation. Why did we need a set? Well, for one thing, we did not know how many nodes we would have in the independent set so we could not go for an array. But what is a set in Python?</p>
-<p>Data structures are ways of organizing data so that items can be stored and retrieved efficiently. Depending on what it is that you need to do in the rest of the program that uses the data you will want to choose among data structures.</p>
-<p>Your program might need to retrieve the items depending in the order in which they are inserted. There are two strategies, First In First Out and Last In First Out.</p>
-<p>The first strategy corresponds <em>queues</em>  and you might be familiar with how it works from your daily queuing! The idea is that in a program you will be able to use variables that are queues, to which you can add elements (at the back of the queue) and retrieve elements (from the front).  The execution time of these operations is constant: independent of the number of elements you already have in the queue.</p>
-<p>The second strategy corresponds to what in computer science is called <em>stacks</em> and they might be a little more unfamiliar! Well, except if you think of stacking up the dishes after washing: you form a pile and when you need dishes to take to the table you take the ones you put last in the pile. So, stacks are piles. The idea is that in a program you will be able to use variables that are stacks, to which you can add elements (at the back of the stack) and retrieve elements (from the back).  The execution time of these operations is constant: independent of the number of elements you already have in the stack.</p>
-<p>However, these are not the only strategies for retrieving elements from a collection of items! Your program might need to always retrieve the minimum (or the maximum) from the collection. It is interesting that even if this is more difficult to achieve, there is a data structure that is very good. It is called a <em>heap</em> and allow you to insert items and retrieve the minimum (or the maximum) very efficiently. These operations are not quite constant time, but they are logarithmic in the size of the heap (logarithmic in the number of elements in the heap). This is great news!</p>
-<p>Finally, we will also consider datastructures that allow for a more general insert and lookup and that are almost as efficient as arrays even if the indices can be of (almost) any types and not just numbers from 0 to length! These data structures are Hash Tables and Binary Search Trees.</p>
-<p>Heaps, Hash Tables and Binary Search Trees are already implemented in Python. The types for dictionaries and sets use  hash tables. There are operations for building up heaps in lists. And, there</p>
-<p>The three data structures we will discuss are already implemented in Python (and in most programming languages). We will look at what operations they support and we will look at the running time behaviour of the operations.</p>
-<p>We start however by looking at lists in Python in order to understand why we need better data structures.</p>
+<p>Data structures are ways of organising data so that <strong>items can be stored and retrieved efficiently</strong>. Depending on what it is that you need to do in the rest of the program that uses the data items you will want to choose among data structures.</p>
+<p>Your program might need to retrieve the items depending in the order in which they are inserted. There are two strategies, First In First Out (<strong>FIFO</strong>) and Last In First Out (<strong>LIFO</strong>).</p>
+<p>The first strategy corresponds <em>queues</em>  and you might be familiar with how it works from your daily queuing! The idea is that in a program you will be able to use variables that are queues, to which you can <strong>add elements (at the back of the queue) and retrieve elements (from the front)</strong>.  The execution time of these operations is <strong>constant</strong>: independent of the number of elements you already have in the queue.</p>
+<p>The second strategy corresponds to what in computer science is called a <em>stack</em>. Stacks might be a little more unfamiliar! Well, except if you think of stacking up the dishes after washing: you form a pile and when you need dishes to take to the table you take the ones you put last in the pile. So, stacks are piles. The idea is that in a program you will be able to use variables that are stacks, to which you can <strong>add elements (at the back of the stack) and retrieve elements (from the back)</strong>.  The execution time of these operations is constant: independent of the number of elements you already have in the stack.</p>
+<p>However, these are not the only strategies for retrieving elements from a collection of items!</p>
+<p>Your program might need to <strong>always retrieve the minimum (or the maximum)</strong> from the collection. It is interesting that even if this is more difficult to achieve, there is a data structure that is very good. It is called a <em>heap</em> and it allows you to insert items and retrieve the minimum (or the maximum) very efficiently. These operations are not quite constant time, but they are <strong>logarithmic in the size of the heap (logarithmic in the number of elements in the heap)</strong>. This is great news!</p>
+<p>Finally, we will also consider data structures that allow for <strong>more general inserts and lookups</strong> and that are <strong>almost as efficient as arrays</strong> even if the indices can be of (almost) any types and not just numbers from 0 to length! These data structures are <em>Hash Tables</em> and <em>Binary Search Trees</em>.</p>
+<p>Heaps, Hash Tables and Binary Search Trees are already implemented in Python:</p>
+<ul class="simple">
+<li><p>dictionaries and sets use hash tables,</p></li>
+<li><p>there are operations for building up heaps in lists,</p></li>
+<li><p>and, there are ordered dictionaries and sets that use binary search trees.</p></li>
+</ul>
+<p>These three data structures we will discuss are already implemented in Python (and in most programming languages).</p>
+<p>We will look at what operations they support and we will look at the running time behaviour of the operations.</p>
+<p>We start however by looking at lists in Python in order to understand why we need better data structures!</p>
 <p>When we discuss implementations of data structures we will introduce how to define and use <em>classes</em> in Python.</p>
 </div>
 
