@@ -1,9 +1,4 @@
 # Lecture 5
+In this chapter we explore Python lists and discuss the execution time of some list operations.
 
-Say something about what the data structures can be good at: retrieving depending on the order of insertion (stacks and queues), retrieving max or min (heaps), arrays with indices that are not numbers (hash tables) sorted arrays (bst).
-
-Lists 
-
-And classes ... 
-
-and queues and stacks
+We also see how to implement stacks and queues. For doing this we need to explain how to define classes in Python.
