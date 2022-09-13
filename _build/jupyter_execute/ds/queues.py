@@ -12,7 +12,7 @@ q = []
 
 for i in range(10):
     # enqueue by placing at the end:
-    q = q + [i]
+    q.append(i)
 print(q)
 print()
 
@@ -23,7 +23,7 @@ for i in range(10):
     print()
 
 
-# The problem is that we know that these operations are linear time! We would like to have constant time instead (not more expensive than updating / reading an array). 
+# The problem is that we know that ```pop(0)``` is linear time! We would like to have constant time instead (not more expensive than updating / reading an array). 
 # 
 # This can be achieved by keeping track of the first and the last element and keeping the elements together via links. We call the pair of an element and a link a Node. We use a class with the name ```_Node``` for these nodes (remember that we use the convention of using an underscore at the begining of a name to indicate that it is an auxiliary function or name). As you can see in the definintion in next cell, a node has two instance variables: an element (item) and a link (next).
 # 
@@ -56,8 +56,8 @@ class Queue:
     # Construct the Queue object self as an empty Queue object.
 
     def __init__(self):
-        self._first = None  # Reference to first _Node
-        self._last = None   # Reference to last _Node
+        self._first  = None  # Reference to first _Node
+        self._last   = None   # Reference to last _Node
         self._length = 0    # Number of items
 
     #-------------------------------------------------------------------

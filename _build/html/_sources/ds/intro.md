@@ -16,15 +16,21 @@ However, these are not the only strategies for retrieving elements from a collec
 
 Finally, we will also consider data structures that allow for **more general inserts and lookups** and that are **almost as efficient as arrays** even if the indices can be of (almost) any types and not just numbers from 0 to length! These data structures are *Hash Tables* and *Binary Search Trees*.
 
+```{note}
 Heaps, Hash Tables and Binary Search Trees are already implemented in Python:
 * dictionaries and sets use hash tables,
 * there are operations for building up heaps in lists,
 * and, there are ordered dictionaries and sets that use binary search trees.
-
-These three data structures we will discuss are already implemented in Python (and in most programming languages).
 
 We will look at what operations they support and we will look at the running time behaviour of the operations.
 
 We start however by looking at lists in Python in order to understand why we need better data structures!
 
 When we discuss implementations of data structures we will introduce how to define and use *classes* in Python.
+```
+```{note}
+Hopefully you will become an educated client of data structures:
+- you will understand what your program needs,
+- you will know which data structure provides the operations that you need and
+- you will know how to use them in Python. 
+```

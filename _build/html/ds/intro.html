@@ -279,7 +279,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="lists.html">
-     Lists in Python
+     Lists and stacks in Python
     </a>
    </li>
    <li class="toctree-l2">
@@ -292,6 +292,23 @@
      Queues
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="heaps.html">
+     Heaps
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="lecture6.html">
+   Lecture 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
   </ul>
  </li>
 </ul>
@@ -404,16 +421,27 @@
 <p>However, these are not the only strategies for retrieving elements from a collection of items!</p>
 <p>Your program might need to <strong>always retrieve the minimum (or the maximum)</strong> from the collection. It is interesting that even if this is more difficult to achieve, there is a data structure that is very good. It is called a <em>heap</em> and it allows you to insert items and retrieve the minimum (or the maximum) very efficiently. These operations are not quite constant time, but they are <strong>logarithmic in the size of the heap (logarithmic in the number of elements in the heap)</strong>. This is great news!</p>
 <p>Finally, we will also consider data structures that allow for <strong>more general inserts and lookups</strong> and that are <strong>almost as efficient as arrays</strong> even if the indices can be of (almost) any types and not just numbers from 0 to length! These data structures are <em>Hash Tables</em> and <em>Binary Search Trees</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Heaps, Hash Tables and Binary Search Trees are already implemented in Python:</p>
 <ul class="simple">
 <li><p>dictionaries and sets use hash tables,</p></li>
 <li><p>there are operations for building up heaps in lists,</p></li>
 <li><p>and, there are ordered dictionaries and sets that use binary search trees.</p></li>
 </ul>
-<p>These three data structures we will discuss are already implemented in Python (and in most programming languages).</p>
 <p>We will look at what operations they support and we will look at the running time behaviour of the operations.</p>
 <p>We start however by looking at lists in Python in order to understand why we need better data structures!</p>
 <p>When we discuss implementations of data structures we will introduce how to define and use <em>classes</em> in Python.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Hopefully you will become an educated client of data structures:</p>
+<ul class="simple">
+<li><p>you will understand what your program needs,</p></li>
+<li><p>you will know which data structure provides the operations that you need and</p></li>
+<li><p>you will know how to use them in Python.</p></li>
+</ul>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

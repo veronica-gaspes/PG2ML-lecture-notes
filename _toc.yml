@@ -50,22 +50,14 @@ parts:
       - file: ds/lists
       - file: ds/classes
       - file: ds/queues
-      - file: ds/stacks
+      - file: ds/heaps
 
-    - file: ds/heap-intro
-      sections:
-      - file: ds/heap
-      - file: ds/heap-apps
 
-    - file: ds/bst-intro
+    - file: ds/lecture6
       sections:
       - file: ds/bst
-      - file: ds/bst-apps
-
-    - file: ds/ht-intr
-      sections:
       - file: ds/ht
-      - file: ds/ht-apps
+
 
     - file: ds/graphs-intro
       sections:

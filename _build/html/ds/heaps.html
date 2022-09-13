@@ -1,0 +1,962 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heaps &#8212; Python - a gateway to machine learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lecture 6" href="lecture6.html" />
+    <link rel="prev" title="Queues" href="queues.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/panda.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python - a gateway to machine learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   About these lecture notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Overview of the course
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Algorithms and their execution time behaviour
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algs/intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../algs/algs-lecture.html">
+   Lecture 1
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/loops.html">
+     Understanding
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       for
+      </span>
+     </code>
+     loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/primes.html">
+     Prime numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/recursion.html">
+     Understanding recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/mul.html">
+     Three algorithms for integer multiplication
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/theory-exercises-1.html">
+     Theory exercises 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/programming-exercises-1.html">
+     Programming exercises 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/programming-solutions-1.html">
+     Solutions to programming exercises 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../algs/execution-time.html">
+   Lecture 2
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/et.html">
+     Order and sorting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algs/math-and-experiments.html">
+     Measuring and estimating execution time behaviour
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Algorithm design paradigms
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../design/intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../design/dc-intro.html">
+   Lecture 3
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dc-mergesort.html">
+     Mergesort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dc-inversions.html">
+     Counting inversions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../design/dp-intro.html">
+   Lecture 4
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dp-fib.html">
+     Fibonacci numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dp-wis.html">
+     Maximum independent set for weighted path graphs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../design/dp-knapsack.html">
+     The knapsack problem
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data structures
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="lecture5.html">
+   Lecture 5
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="lists.html">
+     Lists and stacks in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classes.html">
+     Classes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="queues.html">
+     Queues
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Heaps
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="lecture6.html">
+   Lecture 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ds/heaps.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fds/heaps.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/ds/heaps.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Heaps
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#heaps-in-python">
+   Heaps in Python
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-heap-from-elements-in-a-list">
+     Creating a heap from elements in a list
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-elements-to-a-heap">
+     Adding elements to a heap
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#quiz">
+       Quiz
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#retrieving-the-minimum-element-from-the-heap">
+     Retrieving the minimum element from the heap
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-applications-of-heaps">
+     Some applications of heaps
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#theory-exercise">
+       Theory exercise
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comment">
+       Comment:
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#programming-exercise">
+       Programming exercise
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Programming exercise
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Theory exercise
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Heaps</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Heaps
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#heaps-in-python">
+   Heaps in Python
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-heap-from-elements-in-a-list">
+     Creating a heap from elements in a list
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-elements-to-a-heap">
+     Adding elements to a heap
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#quiz">
+       Quiz
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#retrieving-the-minimum-element-from-the-heap">
+     Retrieving the minimum element from the heap
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-applications-of-heaps">
+     Some applications of heaps
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#theory-exercise">
+       Theory exercise
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comment">
+       Comment:
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#programming-exercise">
+       Programming exercise
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Programming exercise
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Theory exercise
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="heaps">
+<h1>Heaps<a class="headerlink" href="#heaps" title="Permalink to this headline">¶</a></h1>
+<p>We continue with our main theme: we need to store and retrieve items of data as the program runs.</p>
+<p>But now, we would like to be able to retrieve always the least element among the items in the collection (the smallest element, the minimum). And we would like to be able to store and retrieve in <em>almost</em> constant time (because these operations will often be done as part of an iteration, we hope for iterations that are linear).</p>
+<p>We cannot think of using a list because, in order to retrieve the minimum element in constant time we would need to keep the list sorted. And to do so, we would need to insert the new element in its place in the order, and this takes linear time to do.</p>
+<p>This is the problem that heaps solve!</p>
+<p>A <strong>heap</strong>  provides the operations <strong>insert</strong> and <strong>extract min</strong>:</p>
+<ul class="simple">
+<li><p><strong>insert</strong> adds an element to an existing heap.</p></li>
+<li><p><strong>extract min</strong> removes and returns the item with the smallest <em>key</em> from an existing heap.</p></li>
+</ul>
+<p>In most applications of heaps, the items we insert and extract from a heap are so called <em>key-value pairs</em>. This is because we often use the <em>key</em> and not the values themselves to order the items. You can think of the <em>key</em> for example as a priority. The items could be anything, even things for which we do not want to define an order!</p>
+<p>Heaps provide these two operations in <em>almost constant</em> time. In fact, the time it takes to insert or extract the smallest element from a heap depends on how many elements there  are in the heap already. But both operations are <span class="math notranslate nohighlight">\(O(\)</span>log<span class="math notranslate nohighlight">\( \,n)\)</span> (where <span class="math notranslate nohighlight">\(n\)</span> is the number of elements already in the heap).</p>
+<p>The implementation in Python provides also operations to make a heap from a list in linear time (<span class="math notranslate nohighlight">\(O(n)\)</span>) and to peek the smallest element in the list without retrieving it in constant time (<span class="math notranslate nohighlight">\(O(1)\)</span>).</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="heaps-in-python">
+<h1>Heaps in Python<a class="headerlink" href="#heaps-in-python" title="Permalink to this headline">¶</a></h1>
+<p>Python uses lists to implement heaps. In order to use a list as a heap you need to use operations in the module <em>heapq</em> (that you need to import).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">heapq</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-a-heap-from-elements-in-a-list">
+<h2>Creating a heap from elements in a list<a class="headerlink" href="#creating-a-heap-from-elements-in-a-list" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes you already know what elements (at least to start with) you want in your heap. In this case you need to transform your list in a heap. The function is</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Transform list <code class="docutils literal notranslate"><span class="pre">x</span></code> into a heap, in-place, in linear time.</p>
+</div></blockquote>
+<p>Remember that operations that work on a collection and are linear are very good!</p>
+<p>We illustrate the use of <code class="docutils literal notranslate"><span class="pre">heapify</span></code> starting from a list with 1000 elements in random order.</p>
+<p>We print the first 20 elements of the elements in the list and then we print the first elements of the heap (that is a list but with the elements organised in a very special way) so that you can see that the list has been modified.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elems</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">9999</span><span class="p">))</span>
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">elems</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">elems</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
+<span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">elems</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">elems</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[502, 4068, 2546, 6171, 1331, 1588, 4369, 8551, 4345, 9666, 8603, 9123, 1779, 9922, 1476, 2594, 3681, 8809, 3027, 2074]
+[0, 1, 3, 2, 4, 5, 25, 7, 11, 17, 27, 9, 6, 53, 65, 8, 12, 13, 47, 30]
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can run the code several times. You will observe that no matter the order of the shuffled list, the elements in the heapified list are somewhat ordered (the small elements are at the begining, though not completely ordered).</p>
+<p>The heapified list keeps the values organised in such a way that the element in position <code class="docutils literal notranslate"><span class="pre">k</span></code> is smaller or equal than the elements in positions <code class="docutils literal notranslate"><span class="pre">2*k+1</span></code> and <code class="docutils literal notranslate"><span class="pre">2*k+2</span></code>.</p>
+<p>Can you see this?</p>
+<p>What are the elements in positions 0, 1, 2? And in positions 1, 3, 4? and in positions 2, 5, 6?</p>
+<p>Instead of printing the first 20 values you can check whether the list os heap organized using the function:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">heap_organised</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="n">lst</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> 
+                  <span class="ow">and</span> 
+                <span class="n">lst</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">elems</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+               <span class="p">]</span>
+            <span class="p">)</span>
+</pre></div>
+</div>
+<p>Make sure you understand the code. If you don’t: ask your teacher!</p>
+<p>Use it as follows:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">elems</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">9999</span><span class="p">))</span>
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">elems</span><span class="p">)</span>
+<span class="n">heap_organised</span><span class="p">(</span><span class="n">elems</span><span class="p">)</span>
+<span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">elems</span><span class="p">)</span>
+<span class="n">heap_organised</span><span class="p">(</span><span class="n">elems</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-elements-to-a-heap">
+<h2>Adding elements to a heap<a class="headerlink" href="#adding-elements-to-a-heap" title="Permalink to this headline">¶</a></h2>
+<p>Either if you start from the empty heap (actually the empty list <code class="docutils literal notranslate"><span class="pre">[]</span></code>) or from a list that you heapified, it is always possible to insert more elements. This has to be done with the heap operation for inserting so that the heap organisation in the list is preserved.</p>
+<p>Here is an example starting from the empty list, and inserting elements in the reversed order. We print the list of elements inserted and the heap so that you see the consequences of using the heap insertion function: the elements are kept <em>heap organized</em>!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We use variable h for the heap.</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+    <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+[19]
+[18, 19]
+[17, 19, 18]
+[16, 17, 18, 19]
+[15, 16, 18, 19, 17]
+[14, 16, 15, 19, 17, 18]
+[13, 16, 14, 19, 17, 18, 15]
+[12, 13, 14, 16, 17, 18, 15, 19]
+[11, 12, 14, 13, 17, 18, 15, 19, 16]
+[10, 11, 14, 13, 12, 18, 15, 19, 16, 17]
+[9, 10, 14, 13, 11, 18, 15, 19, 16, 17, 12]
+[8, 10, 9, 13, 11, 14, 15, 19, 16, 17, 12, 18]
+[7, 10, 8, 13, 11, 9, 15, 19, 16, 17, 12, 18, 14]
+[6, 10, 7, 13, 11, 9, 8, 19, 16, 17, 12, 18, 14, 15]
+[5, 10, 6, 13, 11, 9, 7, 19, 16, 17, 12, 18, 14, 15, 8]
+[4, 5, 6, 10, 11, 9, 7, 13, 16, 17, 12, 18, 14, 15, 8, 19]
+[3, 4, 6, 5, 11, 9, 7, 10, 16, 17, 12, 18, 14, 15, 8, 19, 13]
+[2, 3, 6, 4, 11, 9, 7, 10, 5, 17, 12, 18, 14, 15, 8, 19, 13, 16]
+[1, 2, 6, 3, 11, 9, 7, 10, 4, 17, 12, 18, 14, 15, 8, 19, 13, 16, 5]
+[0, 1, 6, 3, 2, 9, 7, 10, 4, 11, 12, 18, 14, 15, 8, 19, 13, 16, 5, 17]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="quiz">
+<h3>Quiz<a class="headerlink" href="#quiz" title="Permalink to this headline">¶</a></h3>
+<p>In a heap (in Python a list that is heap organised), what can you say about the element in position 0 of the list?</p>
+<p>If you have a heap (in Python this means a list that is heap organised), then using the function</p>
+<p><code class="docutils literal notranslate"><span class="pre">heappush(heap,</span> <span class="pre">item)</span></code></p>
+<p>to add an item to the heap results in a list that includes the new item and is heap organised.</p>
+<p>If you tried to keep the list sorted it would take linear time <span class="math notranslate nohighlight">\(O(n)\)</span>. Keeping the list heap organised takes only <span class="math notranslate nohighlight">\(O(\)</span>log<span class="math notranslate nohighlight">\( \,n)\)</span></p>
+</div>
+</div>
+<div class="section" id="retrieving-the-minimum-element-from-the-heap">
+<h2>Retrieving the minimum element from the heap<a class="headerlink" href="#retrieving-the-minimum-element-from-the-heap" title="Permalink to this headline">¶</a></h2>
+<p>In order to retrieve the least element in the heap you need to use the operation</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Pop and return the smallest item from the heap, maintaining the heap invariant. If the heap is empty, IndexError is raised. <strong>To access the smallest item without popping it, use heap[0]</strong>.</p>
+</div></blockquote>
+<p>In the quote <em>maintaining the heap invariant</em> means keeping the list heap organised. Here is an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">size</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;lst :&#39;</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;heapified lst: &#39;</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;min: &#39;</span><span class="p">,</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;lst: &#39;</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lst : [19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+
+heapified lst:  [0, 1, 5, 2, 9, 7, 6, 3, 11, 10, 18, 8, 14, 17, 13, 4, 12, 16, 19, 15]
+
+min:  0
+lst:  [1, 2, 5, 3, 9, 7, 6, 4, 11, 10, 18, 8, 14, 17, 13, 15, 12, 16, 19]
+
+min:  1
+lst:  [2, 3, 5, 4, 9, 7, 6, 12, 11, 10, 18, 8, 14, 17, 13, 15, 19, 16]
+
+min:  2
+lst:  [3, 4, 5, 11, 9, 7, 6, 12, 16, 10, 18, 8, 14, 17, 13, 15, 19]
+
+min:  3
+lst:  [4, 9, 5, 11, 10, 7, 6, 12, 16, 19, 18, 8, 14, 17, 13, 15]
+
+min:  4
+lst:  [5, 9, 6, 11, 10, 7, 13, 12, 16, 19, 18, 8, 14, 17, 15]
+
+min:  5
+lst:  [6, 9, 7, 11, 10, 8, 13, 12, 16, 19, 18, 15, 14, 17]
+
+min:  6
+lst:  [7, 9, 8, 11, 10, 14, 13, 12, 16, 19, 18, 15, 17]
+
+min:  7
+lst:  [8, 9, 13, 11, 10, 14, 17, 12, 16, 19, 18, 15]
+
+min:  8
+lst:  [9, 10, 13, 11, 15, 14, 17, 12, 16, 19, 18]
+
+min:  9
+lst:  [10, 11, 13, 12, 15, 14, 17, 18, 16, 19]
+
+min:  10
+lst:  [11, 12, 13, 16, 15, 14, 17, 18, 19]
+
+min:  11
+lst:  [12, 15, 13, 16, 19, 14, 17, 18]
+
+min:  12
+lst:  [13, 15, 14, 16, 19, 18, 17]
+
+min:  13
+lst:  [14, 15, 17, 16, 19, 18]
+
+min:  14
+lst:  [15, 16, 17, 18, 19]
+
+min:  15
+lst:  [16, 18, 17, 19]
+
+min:  16
+lst:  [17, 18, 19]
+
+min:  17
+lst:  [18, 19]
+
+min:  18
+lst:  [19]
+
+min:  19
+lst:  []
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="some-applications-of-heaps">
+<h2>Some applications of heaps<a class="headerlink" href="#some-applications-of-heaps" title="Permalink to this headline">¶</a></h2>
+<p>One very immediate application of heaps is to sort a list (or an array) in <span class="math notranslate nohighlight">\(O(n \)</span>log<span class="math notranslate nohighlight">\( \, n)\)</span>. The algorithm is called <em>heap sort</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">heapsort</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+        <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="c1"># at this point:</span>
+        <span class="c1"># a is intact </span>
+        <span class="c1"># and all the elements are heap organised in h</span>
+        
+    <span class="c1"># we now overwrite a with the elements in order!    </span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="theory-exercise">
+<h3>Theory exercise<a class="headerlink" href="#theory-exercise" title="Permalink to this headline">¶</a></h3>
+<p>Explain why the running time is <span class="math notranslate nohighlight">\(O(n \)</span>log<span class="math notranslate nohighlight">\( \, n)\)</span>.</p>
+</div>
+<div class="section" id="comment">
+<h3>Comment:<a class="headerlink" href="#comment" title="Permalink to this headline">¶</a></h3>
+<p>Heap sort uses the same idea as <em>selection sort</em>: find the smallest elememnt and put it in the first position, then find the next smallest element and put it in the second position, and so on. However, selection sort is <span class="math notranslate nohighlight">\(O(n^2)\)</span> and thus infeasible!</p>
+<blockquote>
+<div><p>Choosing a suitable data structure can turn an algorithm from infeasible to feasible!</p>
+</div></blockquote>
+</div>
+<div class="section" id="programming-exercise">
+<h3>Programming exercise<a class="headerlink" href="#programming-exercise" title="Permalink to this headline">¶</a></h3>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">heapsorted</span></code> that instead of modifying the input array returns a sorted version of the array, keeping the input array as it was.</p>
+<p>Yet another application of heaps is to calculate order statistics: pick the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element in an array.</p>
+</div>
+<div class="section" id="id1">
+<h3>Programming exercise<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>(from <a class="reference external" href="https://algs4.cs.princeton.edu/">Algorithms, 4th Edition</a> by R. Sedgewick and K. Wayne)</p>
+<p>Design a <span class="math notranslate nohighlight">\(k \)</span>log<span class="math notranslate nohighlight">\( \,k\)</span> algorithm to find the <span class="math notranslate nohighlight">\(k\)</span>-th smallest item in a min-oriented binary heap <span class="math notranslate nohighlight">\(H\)</span> containing <span class="math notranslate nohighlight">\(n\)</span> items.</p>
+<p><em>Solution</em>. Build a new min-oriented heap <span class="math notranslate nohighlight">\(H'\)</span>. Do not modify <span class="math notranslate nohighlight">\(H\)</span>. Insert the root of <span class="math notranslate nohighlight">\(H\)</span> into <span class="math notranslate nohighlight">\(H'\)</span> along with its heap index 0. Now, repeatedly delete the minimum item <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(H'\)</span> and insert into <span class="math notranslate nohighlight">\(H'\)</span> the two children of <span class="math notranslate nohighlight">\(x\)</span> from <span class="math notranslate nohighlight">\(H\)</span>. The <span class="math notranslate nohighlight">\(k\)</span>-th item deleted from <span class="math notranslate nohighlight">\(H'\)</span> is the <span class="math notranslate nohighlight">\(k\)</span>-th smallest item in <span class="math notranslate nohighlight">\(H\)</span>.</p>
+<p>Note: you need to insert pairs to the heap <span class="math notranslate nohighlight">\(H'\)</span>: the first component of a pair is the element in the heap <span class="math notranslate nohighlight">\(H\)</span> and the second component is the index in the organised list!</p>
+<p>Write a program that uses this method to find the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element in an array.</p>
+</div>
+<div class="section" id="id2">
+<h3>Theory exercise<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>What is the Big-<span class="math notranslate nohighlight">\(O\)</span> execution time of the algorithm? And of the program (or the algorithm, but starting from the array).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution to programming exercise</span>
+<span class="kn">import</span> <span class="nn">heapq</span>
+<span class="k">def</span> <span class="nf">k_smallest</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    
+    <span class="c1"># h is a heapified!</span>
+    <span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    
+    <span class="n">h_prime</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">)]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ix</span><span class="p">)</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">h_prime</span><span class="p">)</span>
+        <span class="k">if</span> <span class="mi">2</span><span class="o">*</span><span class="n">ix</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">):</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">h_prime</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">ix</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">ix</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">if</span> <span class="mi">2</span><span class="o">*</span><span class="n">ix</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">):</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">h_prime</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">ix</span><span class="o">+</span><span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">ix</span><span class="o">+</span><span class="mi">2</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">h_prime</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">v</span>
+        
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="n">k_smallest</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ds"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="queues.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Queues</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="lecture6.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lecture 6</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Veronica Gaspes<br/>
+    
+        &copy; Copyright none.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
