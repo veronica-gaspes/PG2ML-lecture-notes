@@ -266,7 +266,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../ds/intro.html">
-   Data structures
+   Introduction
   </a>
  </li>
  <li class="toctree-l1 has-children">
@@ -281,7 +281,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ds/lists.html">
-     Lists in Python
+     Lists and stacks in Python
     </a>
    </li>
    <li class="toctree-l2">
@@ -292,6 +292,28 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../ds/queues.html">
      Queues
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/heaps.html">
+     Heaps
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ds/lecture6.html">
+   Lecture 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/bst.html">
+     Binary Search Trees
     </a>
    </li>
   </ul>
@@ -567,7 +589,8 @@ Given an independent set in a weighted path graph, we can calculate the total we
 <p>Again, as in Fibonacci, we see the need for an array that we start filling in using the weights of the nodes in the path graph.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># wpg is a weighted path graph given as an array: the indices are the nodes and the elements are the weights.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># wpg is a weighted path graph given as an array: </span>
+<span class="c1"># the indices are the nodes and the elements are the weights.</span>
 
 <span class="k">def</span> <span class="nf">dp_wis</span><span class="p">(</span><span class="n">wpg</span><span class="p">):</span>
     
@@ -580,7 +603,8 @@ Given an independent set in a weighted path graph, we can calculate the total we
     <span class="c1"># For a path graph with one nodes</span>
     <span class="n">solution_weights</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">wpg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
       
-    <span class="c1"># In all other cases pick the best between the solution for the path graph with one less node</span>
+    <span class="c1"># In all other cases pick the best between the solution for the path graph with </span>
+    <span class="c1"># one less node</span>
     <span class="c1"># or the solution fot the path graph with 2 less nodes and add the last node.</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> 
@@ -652,15 +676,13 @@ Given an independent set in a weighted path graph, we can calculate the total we
     <span class="c1"># Reconstruction ()</span>
     <span class="n">wis</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">n</span>
-    <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">solution_weights</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">wpg</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
             <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">wis</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">2</span>
-            
-    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="n">wis</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        
+    
     <span class="c1"># the set and the weight</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">wis</span><span class="p">,</span> <span class="n">solution_weights</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
 </pre></div>
@@ -688,6 +710,18 @@ Given an independent set in a weighted path graph, we can calculate the total we
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>({1, 3}, 8)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dp_wis_with_reconstruction</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>({0, 2, 4}, 21)
 </pre></div>
 </div>
 </div>
