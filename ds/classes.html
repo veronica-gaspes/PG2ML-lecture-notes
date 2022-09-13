@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Queues" href="queues.html" />
-    <link rel="prev" title="Lists in Python" href="lists.html" />
+    <link rel="prev" title="Lists and stacks in Python" href="lists.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -264,7 +264,7 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   Data structures
+   Introduction
   </a>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -279,7 +279,7 @@
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="lists.html">
-     Lists in Python
+     Lists and stacks in Python
     </a>
    </li>
    <li class="toctree-l2 current active">
@@ -418,7 +418,7 @@
 <a class="reference external" href="https://veronica-gaspes.github.io/Concise-Python/class-defs.html">A concise presentation of Python</a>. The abstract data type is an implementation of something like</p>
 <img src = "https://i5.walmartimages.com/asr/4cec132e-6c9a-4ea5-88d6-754dcf27c63b_1.a8d67a1b6eeacd6410db8f31ae44aa3a.jpeg?odnWidth=1000&odnHeight=1000&odnBg=ffffff" width = "150">
 <p>In a very abstract fashion this is just a number that can be incremented. If you buy one of those you can press the button and the number is incremented by 1. The guy that checks how many people attend a movie in my local film club uses one of these: he stands at the door and just presses the button when we get into the theatre.</p>
-<p>You can imagine other types of data that are not part of Python. For example bank accounts. For our purposes, a bank account has an owner and a balance (how much money is in the account). The operations are: to deposit and to withdraw money. Here is an implementation. The point of showing you this implementation is for you to distinguish between the instance variables (for the owner and the balance) from the arguments of methods (functions in a class are called methods, and they are used with the . notation as you can see in the exmple directly after the class definition).</p>
+<p>You can imagine other types of data that are not part of Python. For example bank accounts. For our purposes, a bank account has an owner and a balance (how much money is in the account). The operations are: to deposit and to withdraw money. Here is an implementation. The point of showing you this implementation is for you to distinguish between the instance variables (for the owner and the balance) from the arguments of methods (functions in a class are called methods, and they are used with the <code class="docutils literal notranslate"><span class="pre">.</span></code> notation as you can see in the example directly after the class definition).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BankAccount</span><span class="p">:</span>
@@ -435,8 +435,9 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="n">amount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
         <span class="c1"># instance variables balance and id get their first values</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">amount</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">identity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span>      <span class="o">=</span> <span class="n">identity</span>
        
+    <span class="c1">#------</span>
     <span class="c1"># The operation of depositing money</span>
     <span class="c1"># updates the value of the instance variable balance.</span>
     <span class="c1"># it is used without self, as in </span>
@@ -444,7 +445,8 @@
     
     <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
-        
+    
+    <span class="c1">#------</span>
     <span class="c1"># The operation of withdrawing  money</span>
     <span class="c1"># updates the value of the instance variable balance only when it is possible:</span>
     
@@ -452,8 +454,10 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">&gt;=</span> <span class="n">amount</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
        
+    <span class="c1">#------</span>
+    <span class="c1"># A standard operation to that printing or showing a value shows what we want </span>
+    <span class="c1"># and not just a memory address!</span>
     
-    <span class="c1"># A standard operation to that printing or showing a value shows what we want and not just a memory address</span>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;Bank account for &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="s1">&#39; with balance &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="p">)</span>
         
@@ -463,7 +467,7 @@
 </div>
 </div>
 <p>In the following example make sure you understand how <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, <code class="docutils literal notranslate"><span class="pre">__str__</span></code>, <code class="docutils literal notranslate"><span class="pre">deposit</span></code> and  <code class="docutils literal notranslate"><span class="pre">withdraw</span></code> are used and make sure you understand that the values of the instance variables preserve the state of the bank account.</p>
-<p>What in the definitions of the methods is an argument (<code class="docutils literal notranslate"><span class="pre">self</span></code>) in the uses is the object before the <code class="docutils literal notranslate"><span class="pre">.</span></code>.</p>
+<p>What in the <em>definition</em> of a method is an argument (<code class="docutils literal notranslate"><span class="pre">self</span></code>), in the <em>uses</em> of the method is the object before the <code class="docutils literal notranslate"><span class="pre">.</span></code>.</p>
 <p>As you can see, the bank account is the same all along, but the amount of money in the account changes as the program deposits and withdraws.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -518,7 +522,7 @@ Bank account for 123456 with balance 9990
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Lists in Python</p>
+            <p class="prev-next-title">Lists and stacks in Python</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="queues.html" title="next page">
