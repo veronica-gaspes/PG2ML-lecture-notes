@@ -123,7 +123,8 @@
 # In[1]:
 
 
-# wpg is a weighted path graph given as an array: the indices are the nodes and the elements are the weights.
+# wpg is a weighted path graph given as an array: 
+# the indices are the nodes and the elements are the weights.
 
 def dp_wis(wpg):
     
@@ -136,7 +137,8 @@ def dp_wis(wpg):
     # For a path graph with one nodes
     solution_weights[1] = wpg[0]
       
-    # In all other cases pick the best between the solution for the path graph with one less node
+    # In all other cases pick the best between the solution for the path graph with 
+    # one less node
     # or the solution fot the path graph with 2 less nodes and add the last node.
     for i in range(2, n + 1):
         solution_weights[i] = max(solution_weights[i - 1], 
@@ -198,15 +200,13 @@ def dp_wis_with_reconstruction(wpg):
     # Reconstruction ()
     wis = set()
     i = n
-    while i >= 2:
+    while i >= 1:
         if solution_weights[i-1] >= solution_weights[i-2] + wpg[i-1]:
             i = i - 1
         else:
             wis.add(i-1)
             i = i - 2
-            
-    if i == 1: wis.add(1)
-        
+    
     # the set and the weight
     return (wis, solution_weights[n])
 
@@ -222,6 +222,12 @@ dp_wis_with_reconstruction([6,10,1,1,1,2])
 
 # the example in the book:
 dp_wis_with_reconstruction([1,4,5,4])
+
+
+# In[7]:
+
+
+dp_wis_with_reconstruction([10,1,10,10,1])
 
 
 # In[ ]:
