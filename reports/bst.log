@@ -22,10 +22,10 @@ word_count_sorted('tomsawyer.txt', 'tomsawyer.counts')
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mFileNotFoundError[0m                         Traceback (most recent call last)
-[0;32m/var/folders/82/jclchxtc8v5c1z006s6fwjm9v2lh42/T/ipykernel_31100/2275969890.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/82/jclchxtc8v5c1z006s6fwjm9v2lh42/T/ipykernel_31160/2275969890.py[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m [0mword_count_sorted[0m[0;34m([0m[0;34m'tomsawyer.txt'[0m[0;34m,[0m [0;34m'tomsawyer.counts'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
-[0;32m/var/folders/82/jclchxtc8v5c1z006s6fwjm9v2lh42/T/ipykernel_31100/1418562632.py[0m in [0;36mword_count_sorted[0;34m(input_file, output_file)[0m
+[0;32m/var/folders/82/jclchxtc8v5c1z006s6fwjm9v2lh42/T/ipykernel_31160/1418562632.py[0m in [0;36mword_count_sorted[0;34m(input_file, output_file)[0m
 [1;32m      6[0m [0;32mdef[0m [0mword_count_sorted[0m[0;34m([0m[0minput_file[0m[0;34m,[0m [0moutput_file[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      7[0m [0;34m[0m[0m
 [0;32m----> 8[0;31m     [0mf[0m [0;34m=[0m [0mopen[0m[0;34m([0m[0minput_file[0m[0;34m,[0m [0;34m'r'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
