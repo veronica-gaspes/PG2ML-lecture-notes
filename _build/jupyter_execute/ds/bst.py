@@ -3,13 +3,13 @@
 
 # # Binary Search Trees
 # 
-# As we mentiones in the introduction, Python does not use Binary Search Trees in any of its abstract data types.
+# As we mentioned in the introduction, Python does not use Binary Search Trees in any of its abstract data types.
 # 
 # Here we include a program for the implementation that is described in the book [Algorithms Illuminated](http://www.algorithmsilluminated.org) in chapters 11.1, 11.2 and 11.3 from part 2. The website includes four videos with explanations. 
 # 
 # The implementation is borrowed from the website of another book: [Introduction to Programming in Python](https://introcs.cs.princeton.edu/python/home/) by R. Sedgewick, K. Wayne and R. Dondero, chapter 4.4.
 # 
-# In order to understand why we used the names that we used, check the comments in the little application in the cell immediately after the implementation.
+# In order to understand why we used the names that we used for the methods of the class, check the comments in the little application in the cell immediately after the implementation.
 # 
 # The workings of this (very naive) implementation can be visualized in [Binary Search Tree](https://www.cs.usfca.edu/~galles/visualization/BST.html)
 
@@ -140,12 +140,12 @@ class _Node:
 phoneNumbers = ordered_dict() 
 
 
-# assigning a value to the ordered dictionary at a key uses __set_item__
+# assigning a value to the ordered dictionary at a key uses __setitem__
 phoneNumbers['vero']   = 123  
 phoneNumbers['martin'] = 456
 phoneNumbers['tim']    = 789
 
-# accessing the ordered dictionary at a given key uses __get_item__
+# accessing the ordered dictionary at a given key uses __getitem__
 print(phoneNumbers['martin'])
 
 # testing whether a key is in the ordered dictionary using in uses __contains__
@@ -160,12 +160,93 @@ for key in phoneNumbers:
     print (key, phoneNumbers[key])
 
 
-# If you run this code you will see that the contents of the dictionary is printed in order (of the keys). 
+# If you run this code you will see that the contents of the dictionary is printed in order (of the keys). No matter in what order the items were added, they appear sorted.
 # 
-# It is enough to change the first line so that instead of creating an ```ordered_dict```you create a ```dict``` to see that the output is **not** ordered.
+# It is enough to change the first line so that instead of creating an ```ordered_dict```you create a ```dict``` to see that the output is **not** ordered: hash tables (the data structure used to implement ```dict```) does not keep an order among the items in the collection.
+# 
+# ## Counting words (again!)
+# 
+# We do the same trick of modifying the program for counting the words in a file to use the binary search tree implementation of a dictionary (```ordered_dict```) and check the output:
 
-# In[ ]:
+# In[3]:
 
 
+# This is the same program as word_count but using an 
+# ordered_dict instead of a dict.
+# As you can see the resulting output file is ordered!
+
+import re
+def word_count_sorted(input_file, output_file):
+ 
+    f = open(input_file, 'r')
+    txt  = f.read()
+    f.close()
+
+    text = re.findall(r"[a-zA-Z']+", txt)
+    
+    # Now to the algorithm: just lookup and update words in the dict
+    # (implemented with a binary search tree.
+    # In our example the keys are words and the values are the count.
+    
+    counts = ordered_dict()
+    
+    for word in text:
+        w = word.lower()
+        if w in counts: 
+            counts[w] += 1
+        else:
+            counts[w] = 1
+    
+    f = open(output_file,'w')
+    
+    # write one (word, count) at a time
+    len = 0
+    for word in counts:
+        f.write(word + ' '+ str(counts[word]) + '\n')
+        len +=1
+
+    f.close()
+    return len
 
 
+# In[4]:
+
+
+word_count_sorted('tomsawyer.txt', 'tomsawyer.counts')
+
+
+# ### Quiz
+# 
+# What is the Big-O for your program? Can you argue for it? 
+# 
+# ### Exercise
+# Modify the implementation of ordered_dict 
+# by adding a function min that returns the (key,value)
+# for the minimum key. What is the Big-O for the execution time?
+# 
+# ### Exercise
+# Modify the implementation of ordered_dict 
+# by adding a function max that returns the (key,value)
+# for the maximum key. What is the Big-O for the execution time?
+# 
+# ### Exercise
+# Modify the implementation of ordered_dict 
+# by adding a function height that returns the height of the tree.
+# Use this method to calculate the height of the tree constructed to count the words in Tom Sawyer. 
+# 
+# **The height of a tree is the number of edges from the root to the deepest leaf**. The height of a binary search tree with only one node is 0. In the binary search tree 
+# 
+# <img src="height.png" width="100"/>
+# 
+# the height is 2: the number of edges from the root (5) to the deepest leaf (4).
+# 
+# 
+# 
+# ### Exercise
+# Write a program that creates an ordered dictionary 
+# and inserts the elements of range(10000) in order. 
+# What is the height of the height of the tree? 
+# 
+# ### Exercise
+# 
+# What could you do if you wanted the output to be sorted by the count instead of by the word? What is the Big-O of your solution?
