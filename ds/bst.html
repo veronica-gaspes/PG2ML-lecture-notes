@@ -414,6 +414,46 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#counting-words-again">
+   Counting words (again!)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quiz">
+     Quiz
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise">
+     Exercise
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Exercise
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Exercise
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Exercise
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -426,6 +466,46 @@
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#counting-words-again">
+   Counting words (again!)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quiz">
+     Quiz
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise">
+     Exercise
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Exercise
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Exercise
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Exercise
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -437,7 +517,7 @@
 <p>As we mentiones in the introduction, Python does not use Binary Search Trees in any of its abstract data types.</p>
 <p>Here we include a program for the implementation that is described in the book <a class="reference external" href="http://www.algorithmsilluminated.org">Algorithms Illuminated</a> in chapters 11.1, 11.2 and 11.3 from part 2. The website includes four videos with explanations.</p>
 <p>The implementation is borrowed from the website of another book: <a class="reference external" href="https://introcs.cs.princeton.edu/python/home/">Introduction to Programming in Python</a> by R. Sedgewick, K. Wayne and R. Dondero, chapter 4.4.</p>
-<p>In order to understand why we used the names that we used, check the comments in the little application in the cell immediately after the implementation.</p>
+<p>In order to understand why we used the names that we used for the methods of the class, check the comments in the little application in the cell immediately after the implementation.</p>
 <p>The workings of this (very naive) implementation can be visualized in <a class="reference external" href="https://www.cs.usfca.edu/~galles/visualization/BST.html">Binary Search Tree</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -565,12 +645,12 @@
 <span class="n">phoneNumbers</span> <span class="o">=</span> <span class="n">ordered_dict</span><span class="p">()</span> 
 
 
-<span class="c1"># assigning a value to the ordered dictionary at a key uses __set_item__</span>
+<span class="c1"># assigning a value to the ordered dictionary at a key uses __setitem__</span>
 <span class="n">phoneNumbers</span><span class="p">[</span><span class="s1">&#39;vero&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="mi">123</span>  
 <span class="n">phoneNumbers</span><span class="p">[</span><span class="s1">&#39;martin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">456</span>
 <span class="n">phoneNumbers</span><span class="p">[</span><span class="s1">&#39;tim&#39;</span><span class="p">]</span>    <span class="o">=</span> <span class="mi">789</span>
 
-<span class="c1"># accessing the ordered dictionary at a given key uses __get_item__</span>
+<span class="c1"># accessing the ordered dictionary at a given key uses __getitem__</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">phoneNumbers</span><span class="p">[</span><span class="s1">&#39;martin&#39;</span><span class="p">])</span>
 
 <span class="c1"># testing whether a key is in the ordered dictionary using in uses __contains__</span>
@@ -597,8 +677,107 @@ vero 123
 </div>
 </div>
 </div>
-<p>If you run this code you will see that the contents of the dictionary is printed in order (of the keys).</p>
-<p>It is enough to change the first line so that instead of creating an <code class="docutils literal notranslate"><span class="pre">ordered_dict</span></code>you create a <code class="docutils literal notranslate"><span class="pre">dict</span></code> to see that the output is <strong>not</strong> ordered.</p>
+<p>If you run this code you will see that the contents of the dictionary is printed in order (of the keys). No matter in what order the items were added, they appear sorted.</p>
+<p>It is enough to change the first line so that instead of creating an <code class="docutils literal notranslate"><span class="pre">ordered_dict</span></code>you create a <code class="docutils literal notranslate"><span class="pre">dict</span></code> to see that the output is <strong>not</strong> ordered: hash tables (the data structure used to implement <code class="docutils literal notranslate"><span class="pre">dict</span></code>) does not keep an order among the items in the collection.</p>
+<div class="section" id="counting-words-again">
+<h2>Counting words (again!)<a class="headerlink" href="#counting-words-again" title="Permalink to this headline">¶</a></h2>
+<p>We do the same trick of modifying the program for counting the words in a file to use the binary search tree implementation of a dictionary (<code class="docutils literal notranslate"><span class="pre">ordered_dict</span></code>) and check the output:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is the same program as word_count but using an </span>
+<span class="c1"># ordered_dict instead of a dict.</span>
+<span class="c1"># As you can see the resulting output file is ordered!</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">word_count_sorted</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+ 
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="n">txt</span>  <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-zA-Z&#39;]+&quot;</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
+    
+    <span class="c1"># Now to the algorithm: just lookup and update words in the dict</span>
+    <span class="c1"># (implemented with a binary search tree.</span>
+    <span class="c1"># In our example the keys are words and the values are the count.</span>
+    
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">ordered_dict</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">counts</span><span class="p">:</span> 
+            <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># write one (word, count) at a time</span>
+    <span class="nb">len</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">counts</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">word</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="n">word</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">len</span> <span class="o">+=</span><span class="mi">1</span>
+
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">len</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word_count_sorted</span><span class="p">(</span><span class="s1">&#39;tomsawyer.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;tomsawyer.counts&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">82</span><span class="o">/</span><span class="n">jclchxtc8v5c1z006s6fwjm9v2lh42</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_31100</span><span class="o">/</span><span class="mf">2275969890.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">word_count_sorted</span><span class="p">(</span><span class="s1">&#39;tomsawyer.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;tomsawyer.counts&#39;</span><span class="p">)</span>
+
+<span class="nn">/var/folders/82/jclchxtc8v5c1z006s6fwjm9v2lh42/T/ipykernel_31100/1418562632.py</span> in <span class="ni">word_count_sorted</span><span class="nt">(input_file, output_file)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">def</span> <span class="nf">word_count_sorted</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">txt</span>  <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;tomsawyer.txt&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="quiz">
+<h3>Quiz<a class="headerlink" href="#quiz" title="Permalink to this headline">¶</a></h3>
+<p>What is the Big-O for your program? Can you argue for it?</p>
+</div>
+<div class="section" id="exercise">
+<h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h3>
+<p>Modify the implementation of ordered_dict
+by adding a function min that returns the (key,value)
+for the minimum key. What is the Big-O for the execution time?</p>
+</div>
+<div class="section" id="id1">
+<h3>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Modify the implementation of ordered_dict
+by adding a function max that returns the (key,value)
+for the maximum key. What is the Big-O for the execution time?</p>
+</div>
+<div class="section" id="id2">
+<h3>Exercise<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Modify the implementation of ordered_dict
+by adding a function height that returns the height of the tree.
+Use this method to calculate the height of the tree constructed to count the words in Tom Sawyer.</p>
+<p><strong>The height of a tree is the number of edges from the root to the deepest leaf</strong>. The height of a binary search tree with only one node is 0. In the binary search tree</p>
+<img src="height.png" width="100"/>
+<p>the height is 2: the number of edges from the root (5) to the deepest leaf (4).</p>
+</div>
+<div class="section" id="id3">
+<h3>Exercise<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>What could you do if you wanted the output to be sorted by the count instead of by the word? What is the Big-O of your solution?</p>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
