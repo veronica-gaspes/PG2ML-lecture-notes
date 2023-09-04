@@ -266,7 +266,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../ds/intro.html">
-   Data structures
+   Introduction
   </a>
  </li>
  <li class="toctree-l1 has-children">
@@ -281,7 +281,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ds/lists.html">
-     Lists in Python
+     Lists and stacks in Python
     </a>
    </li>
    <li class="toctree-l2">
@@ -292,6 +292,33 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../ds/queues.html">
      Queues
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/heaps.html">
+     Heaps
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ds/lecture6.html">
+   Lecture 6
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/bst.html">
+     Binary Search Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/ht.html">
+     Hash tables
     </a>
    </li>
   </ul>
@@ -592,8 +619,7 @@ False
 <h2>A second program for the first solution<a class="headerlink" href="#a-second-program-for-the-first-solution" title="Permalink to this headline">¶</a></h2>
 <p><em>Can we do better?</em></p>
 <p>Well yes!</p>
-<p>A factor of <span class="math notranslate nohighlight">\(n\)</span> cannot be larger than <span class="math notranslate nohighlight">\(\lfloor \sqrt{n} \rfloor\)</span>! So the loop does not need to explore numbers larger than
-<span class="math notranslate nohighlight">\(\lfloor \sqrt{n} \rfloor\)</span>:</p>
+<p>If there are no factors of <span class="math notranslate nohighlight">\(n\)</span> smaller than the square root of <span class="math notranslate nohighlight">\(n\)</span> we will not find one larger than the square root either: a factor larger than the square root would be multiplied by a factor smaller than the square root and we would have found it already! So the loop does not need to explore numbers larger than <span class="math notranslate nohighlight">\(\lfloor \sqrt{n} \rfloor\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
